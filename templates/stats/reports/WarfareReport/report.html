@@ -1,0 +1,74 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/stats/reports/base.html" />
+<%def name="report_base()">
+    <% from django.utils.html import escape %>
+    <% from bellum.meta import MGID %>
+    <% from bellum.common.fixtures.landarmy_stats import UNIT_NAMES %>
+
+    Agresor:
+        % if r.attacker.alliance_id != None:
+            <a href="/alliance/view/${r.attacker.alliance_id}/">[${escape(r.attacker.alliance_shname)}]</a>
+        % endif
+        <a href="/uprofile/view/${r.attacker.id}/">${escape(r.attacker.empire)}</a>
+        <br>
+    Obrońca:
+        % if r.defender.alliance_id != None:
+            <a href="/alliance/view/${r.defender.alliance_id}/">[${escape(r.defender.alliance_shname)}]</a>
+        % endif
+        <a href="/uprofile/view/${r.defender.id}/">${escape(r.defender.empire)}</a>
+        <br>
+    Prowincja:
+        <a href="/space/planetview/province/${r.destination.id}/">${escape(r.destination.name)}</a><br>
+
+    <table>
+        % for turn_id, debris_a, debris_d, army_a, army_d in r.turns:
+        <tr><td colspan="11" style="font-weight: bold;">Kolejka ${turn_id}</td></tr>
+        <tr><td colspan="11">Atakujący <a href="/uprofile/view/${army_a[0][0][0]}/">${army_a[0][0][1]}</a></td></tr>
+        <tr><td></td>
+                    % for cnt, uname in army_a[0][1]:
+                        <td>${uname}</td>
+                    % endfor
+        </tr>
+        <tr><td></td>
+                    % for cnt, uname in army_a[0][1]:
+                        <td>${cnt}</td>
+                    % endfor
+        </tr>
+
+        <tr><td colspan="11">Broniący <a href="/uprofile/view/${army_d[0][0][0]}/">${army_d[0][0][1]}</a></td></tr>
+        <tr><td></td>
+                    % for cnt, uname in army_d[0][1]:
+                        <td>${uname}</td>
+                    % endfor
+        </tr>
+        <tr><td></td>
+                    % for cnt, uname in army_d[0][1]:
+                        <td>${cnt}</td>
+                    % endfor
+        </tr>
+            % for reinf_army in army_d[1:]:
+                <tr><td colspan="11">Wsparcie <a href="/uprofile/view/${reinf_army[0][0]}/">${reinf_army[0][1]}</a></td></tr>
+                <tr><td></td>
+                            % for cnt, uname in reinf_army[1]:
+                                <td>${uname}</td>
+                            % endfor
+                </tr>
+                <tr><td></td>
+                            % for cnt, uname in reinf_army[1]:
+                                <td>${cnt}</td>
+                            % endfor
+                </tr>
+            % endfor
+        % endfor
+    </table>
+        % if r.resolved:
+            Walka zdecydowana -
+            % if r.attacker_won:
+                zwyciężył napastnik
+            % else:
+                zwyciężył obrońca
+            % endif
+        % else:
+            remis
+        % endif
+</%def>

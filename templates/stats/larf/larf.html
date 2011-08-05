@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/base/base.html" />
+<%def name="head()">
+    <link rel="stylesheet" type="text/css" href="/media/css/larf.css">
+</%def>
+<%def name="caption()">wydarzenia</%def>
+<%def name="body()" >
+    <% import datetime %>
+    <% from bellum.common.utils import humanize__timeago %>
+    <div id="larfbody">
+        <div class="sepline"></div>
+
+    % for dte, le in entries:
+        <% dte = eval(dte[:-1]) %>
+        <div class="content">
+            ${le[:-1]}
+            <div class="etc">${humanize__timeago(dte)}</div>
+        </div>
+        <div class="sepline"></div>
+    % endfor
+
+    </div>
+</%def>

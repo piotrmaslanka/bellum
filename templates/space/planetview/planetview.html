@@ -1,0 +1,46 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/base/base.html" />
+<%def name="caption()">planeta</%def>
+<%def name="head()" >
+		<script type="text/javascript" src="/media/js/countdown.js" ></script>
+		<script type="text/javascript" src="/media/ajax/baseajax.js" ></script>
+		<script type="text/javascript" src="/media/ajax/province_radar.js" ></script>
+		<script type="text/javascript" src="/media/ajax/province_build.js"></script>
+		<script type="text/javascript" src="/media/ajax/planetview.js" ></script>
+                <script type="text/javascript" src="/media/js/scripts/script.js"></script>
+                <link rel="stylesheet" type="text/css" href="/media/css/planetview.css">
+                <link rel="stylesheet" type="text/css" href="/media/js/scripts/style.css">
+                <script type="text/javascript">var currentProvinceId = ${firstprovince.id}; var preload = new Image(); preload.src = '/media/gfx/planetview/hl_scan.gif'; </script>
+</%def>
+<%def name="body()" >
+    <% from django.utils.html import escape %>
+    <% from bellum.common.utils import humanize__convertSeconds %>
+    <div class="spacer10"></div>
+    <div style="position: relative;">   <!-- world map anchor -->
+        <div id="planet_map_bg">
+            <div id="nrpos">
+            % for p in planet.province_set.all():
+                <a style="top: ${wctg(p.y)-19}px; left: ${wctg(p.x)-19}px;" class="nrimg" href="javascript:switch_province(${p.id}, ${p.planet_count_number})">
+                % if postprocessed[p.id][1]:
+                    <img alt="Province ${p.planet_count_number+1}" id="psimg${p.planet_count_number}" src="/media/planet_images/${postprocessed[p.id][0]}${p.planet_count_number+1}h.png">
+                    <script type="text/javascript">var currentPcId = ${p.planet_count_number};</script>
+                % else:
+                    <img alt="Province ${p.planet_count_number+1}" id="psimg${p.planet_count_number}" src="/media/planet_images/${postprocessed[p.id][0]}${p.planet_count_number+1}.png">
+                % endif
+                </a>
+            % endfor
+            % if can_relocate:
+                <img id="reloc_button" alt="Relokuj" class="reloc_button" src="/media/gfx/planetview/rel.png" onmouseover="gmbHighlight(this); tooltip.show('Relokuj<br>Zajmie to ${humanize__convertSeconds(relocation_time)}');" onmouseout="gmbUnhighlight(this); tooltip.hide();" onclick="relocate(${planet.id})">
+            % endif
+            % if can_scan:
+                <img id="scan_button" alt="Skanuj" class="scan_button" src="/media/gfx/planetview/scan.png" onclick="scanner(currentProvinceId)" onmouseover="tooltip.show('Skanuj prowincję')" onmouseout="tooltip.hide()">
+            % endif
+            <img id="map_button" alt="Do mapy" class="map_button" src="/media/gfx/planetview/map.png" onclick="window.location='/space/regionmap/${planet.id}/'" onmouseover="tooltip.show('Idź do mapy'); gmbHighlight(this)" onmouseout="tooltip.hide(); gmbUnhighlight(this);">
+            <img alt="Planet graph overview" src="/media/planet_images/${planet.id}.png">
+            </div>
+        </div>
+    </div>
+<div id="province_specific_contents">
+    ${htmldata}
+</div>
+</%def>

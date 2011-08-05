@@ -1,0 +1,112 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/base/base.html" />
+<%def name="caption()">statek</%def>
+<%def name="head()" >
+    <script type="text/javascript" src="/media/js/countdown.js" ></script>
+    <script type="text/javascript" src="/media/ajax/mother_research.js" ></script>
+    <script type="text/javascript" src="/media/ajax/mother.js" ></script>
+    <script type="text/javascript" src="/media/ajax/mother_build.js" ></script>
+    <link rel="stylesheet" type="text/css" href="/media/css/mother.css">
+</%def>
+<%def name="body()" >
+    <% from django.utils.html import escape %>
+    <% from bellum.common.fixtures.technology import TECHNOLOGY_NAMES, getTechnologyDescription, canAdvance %>
+    <% from bellum.common.fixtures.mother_construction import CONSTRUCTION_NAMES, DESCRIPTIONS %>
+    <% from bellum.common.utils import datetime__secondsToNow, humanize__convertSeconds, humanize__requirement, htmlize__requirement %>
+    <% from bellum.meta import MBI, MTI %>
+    <% from bellum.meta import MTI %>
+
+    <div class="centerpad">
+        <div class="mothername" id="mothername_holder">
+            <span class="kword" id="mothername_value">${escape(mother.name)}</span>
+            <span onclick="startRenameMothership()">[Zmień]</span>
+        </div>  <br>
+
+        <div class="relocation">
+            <span class="kword">Położenie: </span>
+            % if relocating:
+                Lot do <a href="/space/planetview/${mro.loc_to.id}/">${escape(mro.loc_to.name)}</a> [${mro.loc_to.x}:${mro.loc_to.y}] <span id="treloc"></span>
+		<script type="text/javascript">countdown('treloc',${mro.got.secondsToCompletion()});</script>
+            % else:
+                <a href="/space/planetview/${mother.orbiting.id}/">${mother.orbiting.name}</a> [${mother.orbiting.x}:${mother.orbiting.y}]
+            % endif
+        </div>
+    </div>
+
+        <div class="bigdesc">Budynki</div>
+
+            % for bid in range(0, MBI+1):
+                <div class="tbcompt centerpad">
+                    <span class="kword">${CONSTRUCTION_NAMES[bid]}</span> [Poziom ${mother.__dict__['b_'+str(bid)]}] <br>
+                        ${DESCRIPTIONS[bid]}
+                </div>
+                    % if bid in constructions:
+                            <div class="tbcompt-building">
+                                <div class="tbc-nums"><span id="timeb${bid}"></span></div>
+                                <div class="tbc-stats">TRWA ROZBUDOWA <a class="tbc-stats-mod" href="javascript:cancelBuildMother(${bid});">(ANULUJ)</a></div>
+                                <script type="text/javascript">countdown('timeb${bid}',${mother.getConstructionObject(bid).got.secondsToCompletion()})</script>
+                            </div>
+                    % elif not c_requirements[bid].validate(mother):
+                            <div class="tbcompt-notready">
+                                <div class="tbc-nums"><b>T</b>: ${int(c_costs[bid][0].titan)} | <b>P</b>: ${int(c_costs[bid][0].pluton)} | <b>M</b>: ${int(c_costs[bid][0].men)} | ${humanize__convertSeconds(c_costs[bid][1])}</div>
+                                <div class="tbc-stats" onmouseover="tooltip.show('${htmlize__requirement(humanize__requirement(c_requirements[bid], mother, mother.owner.technology))}')" onmouseout="tooltip.hide()">WYMAGANIA</div>
+                            </div>
+                    % elif (c_costs[bid][0] > pgo.resources):
+                            <div class="tbcompt-notready">
+                                <div class="tbc-nums"><b>T</b>: ${int(c_costs[bid][0].titan)} | <b>P</b>: ${int(c_costs[bid][0].pluton)} | <b>M</b>: ${int(c_costs[bid][0].men)} | ${humanize__convertSeconds(c_costs[bid][1])}</div>
+                                <div class="tbc-stats">ZA MAŁO SURÓWKI</div>
+                            </div>
+                    % elif (len(constructions)>0):
+                            <div class="tbcompt-notready">
+                                <div class="tbc-nums"><b>T</b>: ${int(c_costs[bid][0].titan)} | <b>P</b>: ${int(c_costs[bid][0].pluton)} | <b>M</b>: ${int(c_costs[bid][0].men)} | ${humanize__convertSeconds(c_costs[bid][1])}</div>
+                                <div class="tbc-stats">INNA ROZBUDOWA</div>
+                            </div>
+                    % else:
+                            <div class="tbcompt-ready">
+                                <div class="tbc-nums"><b>T</b>: ${int(c_costs[bid][0].titan)} | <b>P</b>: ${int(c_costs[bid][0].pluton)} | <b>M</b>: ${int(c_costs[bid][0].men)} | ${humanize__convertSeconds(c_costs[bid][1])}</div>
+                                <div class="tbc-stats"><a href="javascript:startBuildMother(${bid});">ROZBUDUJ</a></div>
+                            </div>
+                    % endif
+            % endfor
+
+            <div class="bigdesc">Technologie</div>
+                % for tid in range(0, MTI+1):
+                <div class="tbcompt centerpad">
+                    <span class="kword">${TECHNOLOGY_NAMES[tid]}</span> [Poziom ${technology.__dict__['o_'+str(tid)]}] <br>
+                        ${getTechnologyDescription(tid, race)}
+                </div>
+			% if tid in researches:
+                            <div class="tbcompt-building">
+                                <div class="tbc-nums"><span id="tek${tid}"></span></div>
+                                <div class="tbc-stats">TRWA BADANIE <a class="tbc-stats-mod" href="javascript:cancelResearchTechnology(${tid});">(ANULUJ)</a></div>
+				<script type="text/javascript">countdown('tek${tid}',${mother.getResearchObject(tid).got.secondsToCompletion()})</script>
+                            </div>
+			% elif not t_requirements[tid].validate(mother):
+                            <div class="tbcompt-notready">
+                                <div class="tbc-nums"><b>T</b>: ${int(t_costs[tid][0].titan)} | <b>P</b>: ${int(t_costs[tid][0].pluton)} | <b>M</b>: ${int(t_costs[tid][0].men)} | ${humanize__convertSeconds(t_costs[tid][1])}</div>
+                                <div class="tbc-stats" onmouseover="tooltip.show('${htmlize__requirement(humanize__requirement(t_requirements[tid], mother, mother.owner.technology))}')" onmouseout="tooltip.hide()">WYMAGANIA</div>
+                            </div>
+			% elif (t_costs[tid][0] > pgo.resources):
+                            <div class="tbcompt-notready">
+                                <div class="tbc-nums"><b>T</b>: ${int(t_costs[tid][0].titan)} | <b>P</b>: ${int(t_costs[tid][0].pluton)} | <b>M</b>: ${int(t_costs[tid][0].men)} | ${humanize__convertSeconds(t_costs[tid][1])}</div>
+                                <div class="tbc-stats">ZA MAŁO SURÓWKI</div>
+                            </div>
+			% elif not canAdvance(technology, pgo.race, tid):
+                            <div class="tbcompt-maxlevel">
+                                <div class="tbc-nums"></div>
+                                <div class="tbc-stats">MAKSYMALNY POZIOM</div>
+                            </div>
+                        % elif ((len(researches) > technology.__dict__['o_12'])) or ((tid == 12) and (len(researches)>0)):
+                            <div class="tbcompt-notready">
+                                <div class="tbc-nums"><b>T</b>: ${int(t_costs[tid][0].titan)} | <b>P</b>: ${int(t_costs[tid][0].pluton)} | <b>M</b>: ${int(t_costs[tid][0].men)} | ${humanize__convertSeconds(t_costs[tid][1])}</div>
+                                <div class="tbc-stats">INNY ROZWÓJ</div>
+                            </div>
+			% else:
+                            <div class="tbcompt-ready">
+                                <div class="tbc-nums"><b>T</b>: ${int(t_costs[tid][0].titan)} | <b>P</b>: ${int(t_costs[tid][0].pluton)} | <b>M</b>: ${int(t_costs[tid][0].men)} | ${humanize__convertSeconds(t_costs[tid][1])}</div>
+                                <div class="tbc-stats"><a href="javascript:startResearchTechnology(${tid});">BADAJ</a></div>
+                            </div>
+			% endif
+                % endfor
+    <script type="text/javascript" src="/media/js/scripts/script.js"></script>
+</%def>

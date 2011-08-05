@@ -1,0 +1,136 @@
+body, table, tr, td, img {
+    border: none;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    border-width: 0;
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+img {           /* standards-compliant HTML has img default display of inline. Learned it the hard way */
+    display: block;
+}
+#main {
+    position: absolute;
+    top: 50%;
+    margin-top: -132px;
+    left: 50%;
+    margin-left: -172px;
+}
+input {
+    position: absolute;
+    top: 3px;
+    width: 202px;
+    height: 26px;
+    left: 3px;
+    color: rgb(169, 169, 169);
+    font-size: 23px;
+    text-align: center;
+    background-color: rgb(32, 31, 31);
+    border: none;
+}
+.cred_caption {
+    color: rgb(157, 157, 157);
+    font-family: Tahoma;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 14px;
+}
+
+td#x03 {
+    width: 253px; height: 55px; background: url('/media/gfx/login/03.png');
+}
+td#x04 {
+    width: 89px; height: 16px; background: url('/media/gfx/login/04.png');
+}
+td#x06 {
+    width: 73px; height: 21px;
+}
+td#x07 {
+    width: 16px; height: 21px; background: url('/media/gfx/login/07.png');
+}
+td#x08 {
+    width: 89px; height: 18px; background: url('/media/gfx/login/08.png');
+}
+td#x09 {
+    width: 75px; height: 11px; background: url('/media/gfx/login/09.png');
+}
+td#x10 {
+    width: 208px; height: 11px; background: url('/media/gfx/login/10.png');
+}
+td#x11 {
+    width: 59px; height: 115px; background: url('/media/gfx/login/11.png');
+}
+td#x12 {
+    width: 75px; height: 32px; background: url('/media/gfx/login/12.png');
+}
+td#x13 {
+    width: 208px; height: 32px; background: url('/media/gfx/login/13.png');
+}
+td#x14 {
+    width: 75px; height: 13px; background: url('/media/gfx/login/14.png');
+}
+td#x15 {
+    width: 208px; height: 13px; background: url('/media/gfx/login/15.png');
+}
+td#x16 {
+    width: 75px; height: 32px; background: url('/media/gfx/login/16.png');
+}
+td#x17 {
+    width: 208px; height: 32px; background: url('/media/gfx/login/17.png');
+}
+td#x18 {
+    width: 75px; height: 27px; background: url('/media/gfx/login/18.png');
+}
+td#x19 {
+    width: 208px; height: 27px; background: url('/media/gfx/login/19.png');
+}
+td#x20 {
+    width: 75px; height: 45px; background: url('/media/gfx/login/20.png');
+}
+td#x21 {
+    width: 136px; height: 45px; background: url('/media/gfx/login/21.png');
+}
+td#x22 {
+    width: 105px; height: 29px;
+}
+td#x23 {
+    width: 26px; height: 45px; background: url('/media/gfx/login/23.png');
+}
+td#x24 {
+    width: 105px; height: 16px; background: url('/media/gfx/login/24.png');
+}
+td#x25 {
+    width: 171px; height: 44px; background: url('/media/gfx/login/25.png');
+}
+td#x26 {
+    width: 171px; height: 44px; background: url('/media/gfx/login/26.png');
+}
+td#break_before_reddot
+{
+    height: 20px;
+}
+a { text-decoration: inherit; } /* prevents blue underlines in Firefox */
+t_spacer_1 { width: 50px; }
+span#reddot_text {
+    position: relative; top: 2px;
+    font-family: Tahoma;
+    color: rgb(123, 120, 120);
+    font-size: 11px;
+}
+
+.specl
+{
+    position: absolute; top: 14px; left: 38px;
+    font-family: Tahoma;
+    color: rgb(123, 120, 120);
+    font-size: 11px;
+}
+
+.xcontainer
+{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}   /* because Chrome is Too Dumb To Live and doesn't respect position:relative in td's */
+
+.relative { position: relative; }

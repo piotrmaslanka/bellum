@@ -1,0 +1,29 @@
+table.formtable
+{
+    width: 100%;
+}
+
+tr.errorfield { font-weight: bold; }
+
+th { left: 0; right: 70%; }
+td { right: 0; left: 30%;}
+tr { position: relative; }
+th.label0 { background-color: #313131; }
+th.label1 { background-color: #565455; }
+td.label0 { background-color: #565455; }
+td.label1 { background-color: #313131; }
+
+td.label0 > input { background-color: #565455; }
+td.label0 > textarea { background-color: #565455; }
+td.label0 > select { background-color: #565455; }
+td.label1 > input { background-color: #313131; }
+td.label1 > textarea { background-color: #313131; }
+td.label1 > select { background-color: #313131; }
+
+input { width: 100%; border: none; padding: 0; margin: 0; color: white; }
+textarea { border: none; width: 100%; padding: 0; margin: 0; color: white; }
+select { width: 100%; border: none; padding: 0; margin: 0; color: white; }
+
+.spacer10 { padding-top: 10px; }
+
+input.submit { background-color: #565455; width: 100%; }

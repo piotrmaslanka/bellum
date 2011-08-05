@@ -1,0 +1,26 @@
+.sepline {
+    height: 2px;
+    background: url('/media/gfx/larf/sep_line.png') repeat-x;
+}
+.content {
+    padding-left: 20px;
+    padding-top: 5px;
+    height: 55px;
+    background: url('/media/gfx/larf/cell_bg.png') repeat-x;
+    font-size: 13px;
+    color: rgb(165, 165, 165);
+    position: relative;
+    font-family: Verdana;
+}
+.content > span, .content > a {
+    color: rgb(138, 255, 0);
+    font-size: 14px;
+}
+div.etc {     /* minutes ago */
+    color: rgb(79, 79, 79);
+    font-size: 13px;
+    font-family: Verdana;
+    position: absolute;
+    bottom: 4px;
+    left: 20px;
+}

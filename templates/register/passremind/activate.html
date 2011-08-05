@@ -1,0 +1,38 @@
+# -*- coding: utf-8 -*-
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+        <title>Bellum</title>
+        <meta http-equiv="Content" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="/media/css/outextbox.css">
+        <script type="text/javascript" src="/media/js/gfxmblock.js"></script>
+</head>
+<body>
+    <p><img alt="Site background" style="z-index: -10; position: fixed; top: 0px; left: 0px; width: 100%; height: 100%;" src="/media/gfx/login/bg.jpg"></p>
+    <form action="/register/register/" method="post" id="myform">
+    <div id="registration">
+        <div id="titular">
+            <img src="/media/gfx/registration/03.png" alt="Logo" id="t_logo">
+            <img src="/media/gfx/registration/04.png" alt="" id="t_04">
+        </div>
+
+        <div id="textbox">
+            % if success:
+                Twoje nowe hasło to ${newpassword}
+            % else:
+                % if error == 'old':
+                    Próba odzyskania hasła rozpoczęła się już ponad tydzień temu i ze względów bezpieczeństwa została zignorowana.
+                % elif error == 'notfound':
+                    Błędny klucz zapytania.
+                % endif
+            % endif
+       </div>
+
+
+        <div id="hasaccount" onclick="window.location='/register/login/'">
+            <table><tr><td style="vertical-align: middle; width: 100%;">Zaloguj się</td></tr></table>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

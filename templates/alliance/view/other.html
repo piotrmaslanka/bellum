@@ -1,0 +1,79 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/base/base.html" />
+<%def name="caption()">soj</%def>
+<%def name="head()" >
+    <link rel="stylesheet" type="text/css" href="/media/css/alliance.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/alliance-view.css">
+</%def>
+<%def name="body()" >
+    <% from django.utils.html import escape %>
+   <%
+      from bellum.common.utils import humanize__convertSeconds
+      from bellum.mother.models import Mother
+      from bellum.stats.models import RankingNone, RankingAlliance
+      from bellum.common.postmarkup import render_bbcode
+    %>
+
+    <div id="top_bar">
+        <div id="top_bar_buttons">
+            <div class="top_bar_button">PROFIL</div>
+            % if pgo.alliance == False:
+                <div class="top_bar_button" id="top_bar_button_hl" onclick="window.location='/alliance/apply/${alliance.id}/'">DOŁĄCZ</div>
+            % endif
+        </div>
+        <div id="top_bar_title">
+            % if alliance.is_avatar == 0:
+                <img src="/media/gfx/alliance/a_img.png" alt="Mordy">
+            % elif alliance.is_avatar == 1:
+                <img src="/media/avatars/a${alliance.id}.png" alt="Awatar">
+            % elif alliance.is_avatar == 2:
+                <img src="/media/avatars/a${alliance.id}.gif" alt="Awatar">
+            % endif
+            ${escape(alliance.name)} &nbsp; <span>${escape(alliance.shname)}</span>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    % if not same:
+    <table id="rsendtab">
+        <tr><td class="first" colspan="5">TOP PLAYERS</td></tr>
+        <% i = 1 %>
+        % for entry in RankingNone.objects.filter(alliance_id=alliance.id)[:5]:
+        <tr>
+            <td class="nr">${i}.</td>
+            <td class="sep2"></td>
+            <td class="name" onclick="window.location='/uprofile/view/${entry.account_id}/'">${escape(entry.empire)}</td>
+            <td class="sep3"></td>
+            <td class="points">${entry.points}</td>
+        </tr>
+            <% i += 1 %>
+        % endfor
+        % for f in xrange(i, 6):
+            <td><td colspan="5"></td></tr>
+        % endfor
+    </table>
+    % endif
+
+    <table id="infotab">
+        <tr><td>ZAŁOŻYCIEL: <span>${escape(alliance.leader.empire)}</span></td></tr>
+        <tr><td>CZŁONKÓW: <span>${alliance.members}</span></td></tr>
+        <% def getrankidps():
+            try:
+                ranks = RankingAlliance.objects.get(alliance=alliance)
+                return ranks.points, ranks.id
+            except:
+                return (u'???', u'???')
+         %>
+         <% points, ranks = getrankidps() %>
+        <tr><td>PUNKTY: <span>${points}</span></td></tr>
+        <tr><td>RANKING SOJUSZY: <span>${ranks}</span></td></tr>
+    </table>
+
+    <div id="funtextarea">
+        % if alliance.mainpage == None:
+                nieokreślona
+        % else:
+                ${render_bbcode(alliance.mainpage)}
+        % endif
+    </div>
+</%def>

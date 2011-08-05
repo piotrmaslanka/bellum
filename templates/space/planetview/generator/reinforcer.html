@@ -1,0 +1,95 @@
+# -*- coding: utf-8 -*-
+<% from bellum.common.utils import htmlize__garrison, humanize__designation %>
+    <% from django.utils.html import escape %>
+<div id="buildings_overview_bg_guard">
+<div id="buildings_overview_bg">
+        <div class="header">
+            <div class="spacer10"></div>
+            <span id="provincename">${escape(province.name)}</span>
+            <span id="adjoint_to">Połączona z:
+                % for neighbour in province.getNeighbours():
+                    <a href="javascript:switch_province(${neighbour.id}, ${neighbour.planet_count_number})">${neighbour.planet_count_number+1}</a>
+                % endfor
+            </span>
+            <div class="spacer10"></div>
+        </div>
+        <div class="content">
+            <div style="margin-left: 10px; margin-right: 10px;">
+                <div class="pvowner">Właściciel: <a href="/uprofile/view/${province.presence.owner.id}/">${escape(province.presence.owner.empire)}</a></div>
+
+            % for i in xrange(0, province.slots):
+                <div class="spacer10"></div>
+                <div class="slot" id="slot_${i}">
+                    <div class="generic_name">SLOT</div>
+                    <div class="clear"></div>
+                    <div class="slot_caption">???</div>
+                </div>
+            % endfor
+        </div>
+    </div>
+</div>
+</div>              <!-- hack's end -->
+<div id="garrison_overview_bg">
+    <div class="generic_name">MOJE WSPARCIE</div>
+    <div class="clear"></div>
+    <div class="garrison_positions">
+        <table class="units">
+            <% from bellum.meta import MGID %>
+            <% from bellum.common.fixtures.landarmy_stats import UNIT_NAMES %>
+            % for i in xrange(0, MGID+1):
+                % if reinforcement.garrison[i] > 0:
+                <tr>
+                    <td class="name">${UNIT_NAMES[race][i]}</td>
+                    <td class="amount">${reinforcement.garrison[i]}</td>
+                </tr>
+                % endif
+            % endfor
+        </table>
+    </div>
+
+    <div class="garrison_offensive_selector">
+        <a href="/space/troopmove/${province.id}/">ZARZĄDZAJ WOJSKIEM</a>
+    </div>
+
+    % if my_land_inbound.count() + my_drop_inbound.count() > 0:
+    <div class="generic_name">RUCHY WOJSK</div>
+    <div class="clear"></div>
+    <div class="garrison_positions">
+        <table class="units">
+                <tr>
+                    <td class="banner" colspan="2">PRZYCHODZĄCE</td>
+                </tr>
+                % for mp in my_land_inbound:
+                <tr>
+                    <td class="name"><span onmouseover="tooltip.show('${htmlize__garrison(mp.garrison, race)}')" onmouseout="tooltip.hide()">
+                            MOJE | ${humanize__designation(mp.designation)} </span>| z
+                    <a href="javascript:switch_province(${mp.srcprovince.id},${mp.srcprovince.planet_count_number})">
+                            ${mp.srcprovince.planet_count_number+1}
+                    </a>
+                    % if mp.designation != 0:
+                        | <a href="javascript:cancel_strike(${mp.id})">ANULUJ</a>
+                    % endif
+                    </td>
+                    <td class="amount">
+                        <span id="tpm_${mp.id}"></span>
+                        <script type="text/javascript">countdown('tpm_${mp.id}', ${mp.got.secondsToCompletion()});</script>
+                    </td>
+                </tr>
+                % endfor
+                % for mp in my_drop_inbound:
+                <tr>
+                    <td class="name"><span onmouseover="tooltip.show('${htmlize__garrison(mp.garrison, race)}')" onmouseout="tooltip.hide()">MOJE | Desant | ${humanize__designation(mp.designation)}
+                    % if mp.designation != 0:
+                        | <a href="javascript:cancel_strike(${mp.id})">ANULUJ</a>
+                    % endif
+                    </span></td>
+                    <td class="amount">
+                        <span id="tmd_${mp.id}"></span>
+                        <script type="text/javascript">countdown('tmd_${mp.id}', ${mp.got.secondsToCompletion()});</script>
+                    </td>
+                </tr>
+                % endfor
+        </table>
+    </div>
+    % endif
+</div>

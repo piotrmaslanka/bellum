@@ -1,0 +1,119 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/base/base.html" />
+<%def name="caption()">soj</%def>
+<%def name="head()" >
+    <script type="text/javascript" src="/media/ajax/baseajax.js" ></script>
+    <link rel="stylesheet" type="text/css" href="/media/css/alliance.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/alliance-playerlist.css">
+    <script type="text/javascript" src="/media/ajax/alliance_management.js" ></script>
+    <script type="text/javascript" src="/media/js/scripts/script.js"></script>
+</%def>
+<%def name="body()" >
+    <% from bellum.alliance.models import AllianceApplication %>
+    <% from bellum.alliance.models import AM_PRIVILEGE, AM_KICK, AM_TEAMSITE, AM_ACCEPT, AM_MODERATE %>
+    <% from django.utils.html import escape %>
+
+    <div id="top_bar">
+        <div id="top_bar_buttons">
+            <div class="top_bar_button" id="top_bar_button_hl" onclick="window.location='/alliance/view/own/'">PROFIL</div>
+            <div class="top_bar_button">SOJUSZ</div>
+        </div>
+        <div id="top_bar_title">
+            % if membership.alliance.is_avatar == 0:
+                <img src="/media/gfx/alliance/a_img.png" alt="Mordy">
+            % elif membership.alliance.is_avatar == 1:
+                <img src="/media/avatars/a${membership.alliance.id}.png" alt="Awatar">
+            % elif membership.alliance.is_avatar == 2:
+                <img src="/media/avatars/a${membership.alliance.id}.gif" alt="Awatar">
+            % endif
+                ${escape(membership.alliance.name)}
+                &nbsp;<span>${escape(membership.alliance.shname)}</span>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div id="subcat_bar">
+        % if membership.hasPrivilege(AM_ACCEPT):
+            <div onclick="window.location='/alliance/accept/list/'">PODANIA (${AllianceApplication.objects.filter(alliance=membership.alliance).count()})</div>
+        % endif
+        <div style="background: url('/media/gfx/alliance/hl_subcat.png'); color: rgb(15, 15, 17);">CZŁONKOWIE</div>
+         % if membership.account == membership.alliance.leader:
+            <div onclick="if (confirm('NA PEWNO CHCESZ ROZWIĄZAĆ SOJUSZ???')) disband()">ROZWIĄŻ</div>
+        % else:
+            <div onclick="if (confirm('NA PEWNO CHCESZ OPUŚCIĆ SOJUSZ???')) leave()">OPUŚĆ</div>
+        % endif
+        % if membership.hasPrivilege(AM_TEAMSITE):
+            <div onclick="window.location='/alliance/teamsite/'">OPIS</div>
+        % endif
+        <div onclick="window.location='http://forum.thebellum.pl/index.php/board,${membership.alliance.smf_board_id}.0.html'">FORUM</div>
+    </div>
+
+    <table id="members_tab">
+        % for entry in entries:
+        <tr>
+            <td class="sep1"></td>
+            <td class="name"><a href="/uprofile/view/${entry.account.id}">
+                    % if entry.account == membership.alliance.leader:
+                        <span style="font-weight: bold;">${escape(entry.account.empire)}</span>
+                    % else:
+                        ${escape(entry.account.empire)}
+                    % endif
+            </a></td>
+            <td class="sep2"></td>
+            % if (membership.account == membership.alliance.leader) or ((membership.hasPrivilege(AM_PRIVILEGE))  and (not (entry.account == membership.alliance.leader))):
+                <td class="rank" id="d_rank${entry.id}" onclick="rank_modify(${entry.id})">${escape(entry.rank)}</td>
+            % else:
+                <td class="rank" id="d_rank${entry.id}">${escape(entry.rank)}</td>
+            % endif
+            <td class="sep3"></td>
+            <td class="extra"></td>
+            <td class="sep4"></td>
+            <td class="picts">
+                % if membership.hasPrivilege(AM_PRIVILEGE):
+                    % if membership.alliance.leader <> entry.account:
+                        <!-- tutaj ikonki uprawnien -->
+                        % if entry.hasPrivilege(AM_ACCEPT):
+                            <img onmouseover="tooltip.show('Może przyjmować podania')" onmouseout="tooltip.hide()" id="p_acpt${entry.id}" onclick="toggle(${entry.id}, 8)" src="/media/gfx/alliance_memberlist/hl_acpt.png" alt="">
+                        % else:
+                            <img onmouseover="tooltip.show('Może przyjmować podania')" onmouseout="tooltip.hide()" id="p_acpt${entry.id}" onclick="toggle(${entry.id}, 8)" src="/media/gfx/alliance_memberlist/acpt.png" alt="">
+                        % endif
+                        % if entry.hasPrivilege(AM_KICK):
+                            <img onmouseover="tooltip.show('Może usuwać członków')" onmouseout="tooltip.hide()" id="p_kick${entry.id}" onclick="toggle(${entry.id}, 4)" src="/media/gfx/alliance_memberlist/hl_dis.png" alt="">
+                        % else:
+                            <img onmouseover="tooltip.show('Może usuwać członków')" onmouseout="tooltip.hide()" id="p_kick${entry.id}" onclick="toggle(${entry.id}, 4)" src="/media/gfx/alliance_memberlist/dis.png" alt="">
+                        % endif
+                        % if entry.hasPrivilege(AM_TEAMSITE):
+                            <img onmouseover="tooltip.show('Może zmieniać opis')" onmouseout="tooltip.hide()" id="p_edit${entry.id}" onclick="toggle(${entry.id}, 1)" src="/media/gfx/alliance_memberlist/hl_edit.png" alt="">
+                        % else:
+                            <img onmouseover="tooltip.show('Może zmieniać opis')" onmouseout="tooltip.hide()" id="p_edit${entry.id}" onclick="toggle(${entry.id}, 1)" src="/media/gfx/alliance_memberlist/edit.png" alt="">
+                        % endif
+                        % if entry.hasPrivilege(AM_PRIVILEGE):
+                            <img onmouseover="tooltip.show('Może zmieniać uprawnienia')" onmouseout="tooltip.hide()" id="p_rank${entry.id}" onclick="toggle(${entry.id}, 2)" src="/media/gfx/alliance_memberlist/hl_rank.png" alt="">
+                        % else:
+                            <img onmouseover="tooltip.show('Może zmieniać uprawnienia')" onmouseout="tooltip.hide()" id="p_rank${entry.id}" onclick="toggle(${entry.id}, 2)" src="/media/gfx/alliance_memberlist/rank.png" alt="">
+                        % endif
+                        % if entry.hasPrivilege(AM_MODERATE):
+                            <img onmouseover="tooltip.show('Może moderować forum sojuszu')" onmouseout="tooltip.hide()" id="p_mod${entry.id}" onclick="toggle(${entry.id}, 16)" src="/media/gfx/alliance_memberlist/hl_mod.png" alt="">
+                        % else:
+                            <img onmouseover="tooltip.show('Może moderować forum sojuszu')" onmouseout="tooltip.hide()" id="p_mod${entry.id}" onclick="toggle(${entry.id}, 16)" src="/media/gfx/alliance_memberlist/mod.png" alt="">
+                        % endif
+                        % if (membership.alliance.leader == membership.account) and (entry.account <> membership.account):
+                            <img onmouseover="gmbHighlight(this); tooltip.show('Uczyń liderem')" onmouseout="gmbUnhighlight(this); tooltip.hide()" onclick="if (confirm('CZY CHCESZ UCZYNIĆ TEGO GRACZA LIDEREM?')) makeleader(${entry.id})" src="/media/gfx/alliance_memberlist/crown.png" alt="">
+                        % endif
+                    % endif
+                % endif
+            </td>
+            <td class="sep5"></td>
+            <td class="kick">
+                % if membership.hasPrivilege(AM_KICK):
+                    % if membership.alliance.leader <> entry.account:
+                        % if membership.account <> entry.account:
+                            <img onclick="if (confirm('Czy chcesz usunąć gracza?')) kick(${entry.id})" alt="Wykop z sojuszu" src="/media/gfx/alliance_memberlist/fire.png" onmouseover="gmbHighlight(this); tooltip.show('Usuń z sojuszu')" onmouseout="gmbUnhighlight(this); tooltip.hide()">
+                        % endif
+                    % endif
+                % endif
+            </td>
+        </tr>
+        % endfor
+    </table>
+</%def>

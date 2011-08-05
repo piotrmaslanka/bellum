@@ -1,0 +1,72 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/base/base.html" />
+<%def name="caption()">soj</%def>
+<%def name="head()" >
+    <script type="text/javascript" src="/media/ajax/baseajax.js" ></script>
+    <link rel="stylesheet" type="text/css" href="/media/css/alliance.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/uprofile-edit.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/alliance-teamsite.css">
+</%def>
+<%def name="body()" >
+    <% from bellum.alliance.models import AllianceApplication %>
+    <% from bellum.alliance.models import AM_PRIVILEGE, AM_KICK, AM_TEAMSITE, AM_ACCEPT %>
+    <% from django.utils.html import escape %>
+
+    <div id="top_bar">
+        <div id="top_bar_buttons">
+            <div class="top_bar_button" id="top_bar_button_hl" onclick="window.location='/alliance/view/own/'">PROFIL</div>
+            <div class="top_bar_button">SOJUSZ</div>
+        </div>
+        <div id="top_bar_title">
+            % if membership.alliance.is_avatar == 0:
+                <img src="/media/gfx/alliance/a_img.png" alt="Mordy">
+            % elif membership.alliance.is_avatar == 1:
+                <img src="/media/avatars/a${membership.alliance.id}.png" alt="Awatar">
+            % elif membership.alliance.is_avatar == 2:
+                <img src="/media/avatars/a${membership.alliance.id}.gif" alt="Awatar">
+            % endif
+                ${escape(membership.alliance.name)}
+                &nbsp;<span>${escape(membership.alliance.shname)}</span>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div id="subcat_bar">
+        % if membership.hasPrivilege(AM_ACCEPT):
+            <div onclick="window.location='/alliance/accept/list/'">PODANIA (${AllianceApplication.objects.filter(alliance=membership.alliance).count()})</div>
+        % endif
+        <div onclick="window.location='/alliance/members/'">CZŁONKOWIE</div>
+         % if membership.account == membership.alliance.leader:
+            <div onclick="if (confirm('NA PEWNO CHCESZ ROZWIĄZAĆ SOJUSZ???')) disband()">ROZWIĄŻ</div>
+        % else:
+            <div onclick="if (confirm('NA PEWNO CHCESZ OPUŚCIĆ SOJUSZ???')) leave()">OPUŚĆ</div>
+        % endif
+        % if membership.hasPrivilege(AM_TEAMSITE):
+            <div style="background: url('/media/gfx/alliance/hl_subcat.png'); color: rgb(15, 15, 17);" onclick="window.location='/alliance/teamsite/'">OPIS</div>
+        % endif
+        <div onclick="window.location='http://forum.thebellum.pl/index.php/board,${membership.alliance.smf_board_id}.0.html'">FORUM</div>
+    </div>
+
+    <form id="myform" method="post" action="/alliance/teamsite/">
+    <div id="mpbox">
+        <textarea name="mainpage" rows="20" id="textdata">${escape(membership.alliance.mainpage)}</textarea>
+    </div>
+    <div id="save" onclick="document.getElementById('myform').submit()">ZAPISZ</div>
+    </form>
+
+    <div class="clear"></div>
+    <form id="myform2" method="post" action="/alliance/teamsite/avatar/" enctype="multipart/form-data">
+    <table id="infotab">
+        % if avtchange_success:
+            <tr><td class="formerror">POMYŚLNIE ZMIENIONO AWATAR!</td></tr>
+        % endif
+       <tr><td class="formerror">Awatar statyczny - dowolny plik, zostanie zeskalowany</td></tr>
+       <tr><td class="formerror">Awatar animowany - GIF, 32x32 pikseli, do 100 kB</td></tr>
+        % if len(pa['avatar'].errors) > 0:
+            <tr><td class="formerror"><span>${pa['avatar'].errors[0]}</span></td></tr>
+        % endif
+        <tr><td>AWATAR: ${pa['avatar']}</td></tr>
+    </table>
+    <div id="save" onclick="document.getElementById('myform2').submit()">USTAW</div>
+    </form>
+</%def>

@@ -1,0 +1,11 @@
+# coding=UTF-8
+<% bx = x - 10 %>
+<% by = y - 10 %>
+<% from django.utils.html import escape %>
+% for p in planets:
+        <img src="/media/gfx/regionmap/p${p.kind}.png" onmouseover="tooltip.show('${escape(p.name)} <br> ${p.x}:${p.y}')" onmouseout="tooltip.hide()"
+             class="planet"
+             alt="${p.name}"
+             style="top: ${(p.y-by)*40}px; left: ${(p.x-bx)*40}px"
+             onclick="window.location='/space/planetview/${p.id}'">
+% endfor

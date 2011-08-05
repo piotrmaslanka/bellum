@@ -1,0 +1,47 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/base/base.html" />
+<%def name="head()" ></%def>
+<%def name="caption()">FIVE MILES OUT</%def>
+<%def name="body()" >
+        <% from django.utils.html import escape %>
+        <% from bellum.meta import MGID%>
+        <% from bellum.common.fixtures.landarmy_stats import UNIT_NAMES %>
+
+        <h1>Raport z prowincji ${r.province.name}</h1>
+            
+        <b>Matki stacjonarne: </b><div style="padding-left: 2em;">
+
+        % if r.mothers == []:
+            <em>Brak!</em>
+        % else:
+            % for player, mum, nonetype in r.mothers:
+                - <b>${escape(mum.name)}</b> gracza <a href="/uprofile/view/${player.id}/">${escape(player.empire)}</a><br>
+            % endfor
+        % endif
+        </div>
+
+        <b>Matki wylatujące: </b><div style="padding-left: 2em;">
+        % if r.rlevel < 2:
+            <em>Zbyt niski poziom radaru!</em>
+        % elif r.moutbound == []:
+            <em>Brak!</em>
+        % else:
+            % for player, mum, target in r.moutbound:
+                - <b>${mum.name}</b> gracza <a href="/uprofile/view/${player.id}/">${escape(player.empire)}</a> w drodze na <a href="/planet/view/${target.id}">${escape(target.name)}</a><br>
+            % endfor
+        % endif
+        </div>
+
+        <b>Matki przylatujące: </b><div style="padding-left: 2em;">
+        % if r.rlevel < 3:
+            <em>Zbyt niski poziom radaru!</em>
+        % elif r.minbound == []:
+            <em>Brak!</em>
+        % else:
+            % for player, mum, target in r.minbound:
+                - <b>${mum.name}</b> gracza <a href="/uprofile/view/${player.id}/">${escape(player.empire)}</a> w drodze z <a href="/planet/view/${target.id}">${escape(target.name)}</a><br>
+            % endfor
+        % endif
+        </div>
+
+</%def>

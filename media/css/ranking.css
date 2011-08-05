@@ -1,0 +1,72 @@
+div#top_bar
+{
+    height: 30px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    width: 100%;
+    font-family: Verdana;
+    background: url('/media/gfx/ranking/cat_bg.png') repeat-x;
+}
+    #top_bar_title {
+        padding-left: 10px;
+        font-size: 18px;
+        color: rgb(161, 161, 161);
+    }
+    #top_bar_buttons {
+        float: right;
+        padding-right: 5px;
+    }
+
+    .top_bar_button {
+        width: 139px;
+        height: 24px;
+        margin-left: 3px;
+        margin-right: 3px;
+        background: url('/media/gfx/ranking/cat.png');
+        text-align: center;
+        display: inline-block;
+        font-size: 13px;
+        padding-top: 6px;
+        color: rgb(113, 176, 197);
+    }
+ 
+    #top_bar_button_hl {
+        color: black;
+        background: url('/media/gfx/ranking/hl_cat.png');
+    }
+
+#ranking_tab { margin-top: 5px; width: 100%; border-spacing: 0; border-collapse: collapse; }
+    #ranking_tab tr { height: 27px; }
+    tr#ranking_row_mine { font-weight: bold; }
+    #ranking_tab td { text-align: center; }
+    #ranking_tab tr:nth-child(even) { background: url('/media/gfx/ranking/1_bg.png') repeat-x; }
+    #ranking_tab tr:nth-child(odd) { background: url('/media/gfx/ranking/2_bg.png') repeat-x; }
+    #ranking_tab .s1 { width: 20px; }
+    #ranking_tab .nr { width: 100px; }
+    #ranking_tab .s2 { width: 20px; }
+    #ranking_tab .name { text-align: left; }
+    #ranking_tab .s3 { width: 20px; }
+    #ranking_tab .extra { width: 290px; }
+    #ranking_tab .s4 { width: 20px; }
+    #ranking_tab .s5 { width: 2px; background: url('/media/gfx/ranking/sep.png'); }
+    #ranking_tab .score { }
+    #ranking_tab .s6 { width: 20px; }
+    #ranking_tab .deltaimg { width: 30px;}
+    #ranking_tab .delta { }
+
+#blocks {
+    margin-left: 300px;
+}
+    #blocks div { float: left; margin-right: 15px; height: 28px; }
+
+    #b_sharpleft { width: 33px; background: url('/media/gfx/ranking/start.png'); }
+    #b_left { width: 25px; background: url('/media/gfx/ranking/prev.png'); }
+    .b_page {
+        width: 28px; background: url('/media/gfx/ranking/page.png'); text-align: center;
+        font-size: 14px;
+        color: white;
+    }
+    .b_page a { color: rgb(145, 145, 145); text-decoration: none; }
+
+    #b_right { width: 24px; background: url('/media/gfx/ranking/forw.png'); }
+    #b_sharpright { width: 33px; background: url('/media/gfx/ranking/end.png'); }

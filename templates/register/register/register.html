@@ -1,0 +1,89 @@
+# -*- coding: utf-8 -*-
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+        <title>Bellum</title>
+        <meta http-equiv="Content" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="/media/css/registration.css">
+        <script type="text/javascript" src="/media/js/gfxmblock.js"></script>
+</head>
+<body>
+    <p><img alt="Site background" style="z-index: -10; position: fixed; top: 0px; left: 0px; width: 100%; height: 100%;" src="/media/gfx/login/bg.jpg"></p>
+    <form action="/register/register/" method="post" id="myform">
+    <div id="registration">
+        <div id="titular">
+            <img src="/media/gfx/registration/03.png" alt="Logo" id="t_logo">
+            <img src="/media/gfx/registration/04.png" alt="" id="t_04">
+            <img src="/media/gfx/registration/06.png" alt="Disclaimer" id="t_disclaimer">
+        </div>
+
+        <div class="inputdiv">
+            <div class="input_label">Login:</div>
+            <div class="input_field">${form['login']}</div>
+            <div class="input_end"></div>
+        </div>
+        <div class="brkdiv">
+            <img src="/media/gfx/registration/10.png" alt=""><div class="errrap">${sup(form['login'])}</div><img src="/media/gfx/registration/12.png" alt="">
+        </div>
+
+        <div class="inputdiv">
+            <div class="input_label">Hasło:</div>
+            <div class="input_field">${form['password']}</div>
+            <div class="input_end"></div>
+        </div>
+        <div class="brkdiv">
+            <img src="/media/gfx/registration/10.png" alt=""><div class="errrap">${sup(form['password'])}</div><img src="/media/gfx/registration/12.png" alt="">
+        </div>
+
+        <div class="inputdiv">
+            <div class="input_label">Powtórz hasło:</div>
+            <div class="input_field">${form['password2']}</div>
+            <div class="input_end"></div>
+        </div>
+        <div class="brkdiv">
+            <img src="/media/gfx/registration/10.png" alt=""><div class="errrap">${sup(form['password2'])}</div><img src="/media/gfx/registration/12.png" alt="">
+        </div>
+
+        <div class="inputdiv">
+            <div class="input_label">Rasa:</div>
+            <div class="input_field">${form['race']}</div>
+            <div class="input_end"></div>
+        </div>
+        <div class="brkdiv">
+            <img src="/media/gfx/registration/10.png" alt=""><div class="errrap">${sup(form['race'])}</div><img src="/media/gfx/registration/12.png" alt="">
+        </div>
+
+        <div class="inputdiv">
+            <div class="input_label">Email:</div>
+            <div class="input_field">${form['email']}</div>
+            <div class="input_end"></div>
+        </div>
+        <div class="brkdiv">
+            <img src="/media/gfx/registration/10.png" alt=""><div class="errrap">${sup(form['email'])}</div><img src="/media/gfx/registration/12.png" alt="">
+        </div>
+
+        <div class="inputdiv">
+            <div class="input_label">Nick w grze:</div>
+            <div class="input_field">${form['empire']}</div>
+            <div class="input_end"></div>
+        </div>
+        <div class="brkdiv">
+            <img src="/media/gfx/registration/10.png" alt=""><div class="errrap">${sup(form['empire'])}</div><img src="/media/gfx/registration/12.png" alt="">
+        </div>
+
+
+        <div id="regbox">
+            <img src="/media/gfx/registration/14.png" alt="">
+            <img src="/media/gfx/registration/15.png" id="regbox_b" alt="Zarejestruj" onclick="document.getElementById('myform').submit()" onmouseover="gmbHighlight(this)" onmouseout="gmbUnhighlight(this)">
+            <img src="/media/gfx/registration/17.png" alt="" id="regbox_u">
+            <img src="/media/gfx/registration/16.png" alt="" id="regbox_k">
+        </div>
+
+        <div id="hasaccount" onclick="window.location='/register/login'">
+            <table><tr><td style="vertical-align: middle; width: 100%;">Masz już konto? Zaloguj się.</td></tr></table>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

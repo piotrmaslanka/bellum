@@ -1,0 +1,118 @@
+table#root {
+    width: 894px;
+    font-family: Tahoma;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: none;
+}
+/* positioning shitz */
+.a_left { position: absolute; top: 0; left: 0; }
+.a_right { position: absolute; top: 0; right: 0; }
+/* border shitz */
+.brd_black_h { background-color: black; height: 1px; }
+.brd_black_v { background-color: black; width: 1px; }
+.brd_gray_h { background-color: rgb(60, 60, 60); height: 1px; }
+.brd_gray_v { background-color: rgb(60, 60, 60); width: 1px; }
+/* safe sane consensual */
+td {
+    border: none;
+    padding: 0 0 0 0;
+    vertical-align: middle;
+}
+/* ------- CAPTION ----------- */
+
+tr.caption > td {
+    color: rgb(162, 162, 162);
+    font-size: 14px;
+    text-align: center;
+    position: relative;
+    height: 27px;
+}
+
+
+/* -------- TXT ---------- */
+tr.txt > td {
+    height: 29px;
+    /* need a light, sir? */
+}
+.txt_buf { width: 15px; } /* left side buffer */
+
+.txt_name {
+    color: rgb(142, 142, 142);
+    font-size: 11px;
+}
+.txt_value {
+    color: rgb(255, 192, 0);
+    font-size: 13px;
+}
+    .txt_value_fltright { float: right; }
+    .txt_value_fltright img { float: right;; }
+
+.txt_override {
+    color: rgb(142, 142, 142);
+    font-size: 11px;
+}
+
+/* ------- QUEUE -------- */
+.queue_label {
+    text-align: center;
+    color: rgb(162, 162, 162);
+    font-size: 14px;
+}
+.queue_icons {
+    height: 30px;
+    text-align: center;
+    width: 446px;
+}
+.queue_icons > div {
+    width: 30px;
+    display: inline-block;
+    height: 30px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    margin-right: 15px;
+    position: relative;
+}
+
+/* ----- PROVINCES ------ */
+.province_td {
+    padding-top: 15px;
+    font-size: 14px;
+    color: rgb(255, 192, 0);
+    text-align: center;
+    width: 446px;
+}
+.province_imgs {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+    text-align: center;
+}
+    .province_img {
+        width: 30px;
+        height: 27px;
+        display: inline-block;
+        margin-left: 7px;
+        margin-right: 7px;
+        position: relative;
+        background: url('/media/gfx/empire/prov.png');
+    }
+    .province_img:hover { background: url('/media/gfx/empire/hl_prov.png'); }
+
+    .province_img > span {
+        text-align: center;
+        font-weight: bold;
+        font-size: 13px;
+    }
+    .province_img > span.c0 {
+        color: rgb(25, 234, 9); /* mine */
+    }
+    .province_img > span.c1 {
+        color: rgb(235, 9, 9);  /* enemy */
+    }
+    .province_img > span.c2 {
+        color: rgb(16, 110, 238);  /* ally */
+    }
+    .province_img > span.c3 {
+        color: rgb(127, 127, 127); /* nobody's */
+    }

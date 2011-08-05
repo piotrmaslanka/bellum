@@ -1,0 +1,24 @@
+            /* generic mother description */
+
+.mothername { font-size: 14px; color: rgb(155, 155, 155); font-family: Arial; }
+.mothername .kword { font-size: 18px; color: rgb(255, 204, 0); }
+.mothername input { font-size: 18px; color: rgb(255, 204, 0); border: none; background-color: rgb(42, 42, 42); font-weight: bold; }
+.relocation { padding-bottom: 10px; font-size: 14px; color: white; font-family: Arial;}
+.relocation .kword { color: rgb(255, 204, 0); }
+
+.ucommand { font-size: 14px; color: rgb(155, 155, 155); font-family: Arial; }
+.ucommand .kword { color: rgb(255, 204, 0); }
+.ucommand .pname { color: white; }
+
+.tbcompt { background-color: rgb(42, 42, 42); color: rgb(155, 155, 155); padding-bottom: 10px; padding-top: 5px;}
+.tbcompt .kword { color: rgb(255, 204, 0); }
+
+.tbcompt-maxlevel { position: relative; color: black; background: url('/media/gfx/mother/max.png') repeat-x; height: 30px; }
+.tbcompt-ready { position: relative; color: black; background: url('/media/gfx/mother/g.png') repeat-x; height: 30px; }
+.tbcompt-building { position: relative; color: black; background: url('/media/gfx/mother/y.png') repeat-x; height: 30px; }
+.tbcompt-notready { position: relative; color: white; background: url('/media/gfx/mother/r.png') repeat-x; height: 30px; }
+    .tbc-nums { top: 8px; font-size: 14px; position: absolute; left: 0; width: 446px; text-align: center; }
+    .tbc-stats { font-weight: bold; top: 6px; font-size: 16px; position: absolute; right: 0; width: 300px; text-align: center; }
+    .tbc-stats-mod { font-size: 14px; }
+
+.bigdesc { padding-top: 20px; text-align: center; font-size: 18px; color: rgb(255, 204, 0); padding-bottom: 20px;  }

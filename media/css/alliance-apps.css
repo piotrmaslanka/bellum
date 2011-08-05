@@ -1,0 +1,30 @@
+.app_hdr {
+    background: url('/media/gfx/alliance/line_bg.png') repeat-x;
+    height: 24px;
+    font-size: 14px;
+    color: rgb(231, 199, 33);
+    font-weight: bold;
+    padding-top: 3px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.app_txt img
+{
+    position: relative;
+    top: -15px;
+    float: right;
+    margin-left: 20px;
+    padding: 0 0 0 0;
+    border: none;
+}
+
+.app_txt {
+    padding: 20px 20px 20px 20px;
+    color: rgb(138, 138, 138);
+
+    font-size: 12px;
+    background: url('/media/gfx/alliance/info_top.png') repeat-x;
+    background-color: rgb(34, 41, 45);
+    margin-bottom: 10px;
+}

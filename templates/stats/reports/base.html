@@ -1,0 +1,12 @@
+# coding=UTF-8
+<% from django.utils.html import escape %>
+% if membership != None:
+    <select id="relay_to">
+        % for ms in membership.alliance.alliancemembership_set.all():
+            <option value="${ms.account.id}">${escape(ms.account.empire)}</option>
+        % endfor
+    </select>
+    <input type="button" value="Prześlij kopię raportu" onclick="chat_relay()">
+    <br>
+% endif
+${self.report_base()}

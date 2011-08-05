@@ -1,0 +1,57 @@
+#rsendtab {
+    margin-top: 14px;
+    margin-left: 14px;
+    float: right;
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 300px;
+    color: rgb(138, 138, 138);
+}
+
+#rsendtab td {
+        padding-left: 10px;
+        background: url('/media/gfx/alliance/line_bg.png') repeat-x;
+        height: 27px;
+        vertical-align: middle;
+    }
+    #rsendtab td.first {
+        background: url('/media/gfx/alliance/best_bg.png') repeat-x;
+        width: 100%;
+        height: 27px;
+        text-align: center;
+    }
+    .sep1, .sep2, .sep3 { width: 15px; }
+    .nr { width: 35px; }
+    .name { width: 140px; overflow: hidden; }
+    .points { width: 80px; color: rgb(225, 189, 3); text-align: center; }
+
+
+#infotab {
+    margin-top: 14px;
+    width: 580px;
+    border-spacing: 0 0 0 0;
+    border-collapse: collapse;
+}
+
+#infotab td {
+    padding-left: 10px;
+    font-size: 12px;
+    color: rgb(138, 138, 138);
+    height: 27px;
+    background: url('/media/gfx/alliance/line_bg.png') repeat-x;
+}
+
+#infotab span {
+    color: rgb(225, 189, 3);
+}
+
+#funtextarea
+{
+    font-size: 12px;
+    color: rgb(138, 138, 138);
+    padding: 10px 10px 10px 10px;
+    background: url('/media/gfx/alliance/info_top.png') repeat-x;
+    margin-top: 14px;
+    width: 560px;
+    background-color: rgb(34, 41, 45);
+}

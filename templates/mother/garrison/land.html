@@ -1,0 +1,72 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/base/base.html" />
+<%def name="caption()">szkolenie</%def>
+<%def name="head()" >
+	<script type="text/javascript" src="/media/js/countdown.js" ></script>
+	<script type="text/javascript" src="/media/ajax/mother_landarmy_produce.js"></script>
+        <link rel="stylesheet" type="text/css" href="/media/css/mother_garrison.css">
+        <link rel="stylesheet" type="text/css" href="/media/js/scripts/style.css">
+</%def>
+<%def name="body()" >
+                <% from bellum.common.fixtures.landarmy_stats import UNIT_NAMES, UNIT_DESCRIPTIONS %>
+		<% from bellum.common.utils import datetime__secondsToNow, humanize__convertSeconds, humanize__requirement, htmlize__requirement %>
+		<% from datetime import timedelta %>
+    <% zebra = 0 %>
+    % for id, val in garn.iteritems():
+        % if zebra % 2 == 0:
+            <div class="unitblock" style="background-color: #313131;">
+        % else:
+            <div class="unitblock" style="background-color: #565455;">
+        % endif
+        <% zebra += 1 %>
+        <div class="picture"><img src="/media/gfx/army_img.png" alt="Unit picture"><span>${val['has']}</span></div>
+        <div class="mainbox">
+            <span class="kword">${UNIT_NAMES[pgo.race][id]}</span><br>
+            <div class="udesc">
+            ${UNIT_DESCRIPTIONS[pgo.race][id].replace('\n','<br>')}
+            </div>
+            <span class="ucost">T: ${int(val['cost'].titan)} | P: ${int(val['cost'].pluton)} | M: ${int(val['cost'].men)} ${humanize__convertSeconds(val['time'])}</span>
+
+            % if val['req']:
+                <div class="rsfield_poly">
+                    <input class="leftside" type="text" name="amount" id="make${id}">
+                    <div class="rightside"><a href="javascript:produce(${id})">ZBUDUJ</a></div>
+                </div>
+            % else:
+                <div class="rsfield_mono">
+                    <div style="padding-top: 8px;"></div>
+                    <span onmouseover="tooltip.show('${htmlize__requirement(humanize__requirement(val['creq'], mother, mother.owner.technology))}')" onmouseout="tooltip.hide()">NIE SPEŁNIONO WYMAGAŃ</span>
+                </div>
+            % endif
+        </div>
+    </div>
+    % endfor
+
+    <% cardinal = 1 %>
+    % if lpos.count() > 0:
+        <div class="bigdesc">PRODUKCJA</div>
+        <table class="prodtable">
+            % for lpo in lpos:
+                <tr>
+                    <td class="subspace"></td>
+                    <td class="ordinal">
+                        ${cardinal}.
+                        <% cardinal += 1 %>
+                    </td>
+                    <td class="unitname">
+                            ${UNIT_NAMES[pgo.race][lpo.sold_nr]}
+                    </td>
+                    <td class="unitcount">
+                        ${lpo.amount}
+                    </td>
+                    <td class="spacet"></td>
+                    <td class="time">
+                            <span id="lpo${lpo.id}"></span>
+                            <script type="text/javascript">countdown("lpo${lpo.id}", ${datetime__secondsToNow(lpo.got.ordered_on + timedelta(0, lpo.maketime*lpo.amount))});</script>
+                    </td>
+                </tr>
+            % endfor
+        </table>
+    % endif
+    <script type="text/javascript" src="/media/js/scripts/script.js"></script>
+</%def>

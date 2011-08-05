@@ -1,0 +1,24 @@
+#gameboy { float: right; margin-right: 5px; margin-top: 5px; }
+#gameboy td { height: 32px; width: 32px; }
+#secreggal { margin-left: 30px; padding-top: 20px; }
+#secreggal img { display: inline; }
+    #coords {
+        padding-top: 20px;
+        font-family: Tahoma;
+        font-size: 12pt;
+        color: rgb(99, 99, 99);
+    }
+#map_content {
+    background: url('/media/gfx/regionmap/map_bg.png') repeat;
+    height: 840px;
+    width: 840px;
+    margin: 0 27px 0 27px;
+    position: relative; /* lotsa crap gonna be anchored here */
+}
+    .planet {   /* -------- sector */
+        position: absolute;
+    }
+    #regiontab { border-collapse: collapse; }
+    #regiontab td { width: 56px; height: 56px; }    /* ------- region */
+    #galaxytab { border-collapse: collapse; }
+    #galaxytab td { width: 84px; height: 84px; }    /* ------- galaxy */

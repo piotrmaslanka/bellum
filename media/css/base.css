@@ -1,0 +1,78 @@
+/* baseline definitions */
+* { word-wrap: break-word; }
+a { color: inherit; text-decoration: none; }
+body { font-family: Arial; color: white; background-color: rgb(9, 22, 38); }  /* readability issues. Times New Roman really sucks for this */
+img { vertical-align: bottom; border-style: none; }
+div
+{
+    border: none;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+.clear { clear: both; }
+.clearleft { clear: left; }
+.clearright { clear: right; }
+
+/* main layout definitions */
+
+div#background {
+    z-index: -1; position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%;
+}
+div#background img { width: 100%; height: 100%;}
+
+div#centerb     /* the very center div */
+{
+    width: 928px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div#topmenu {}      /* top menu */
+    #topmenu_t {
+        border-spacing: 0;
+        border-collapse: collapse;
+        width: 928px;
+        height: 77px;
+    }
+    #topmenu_lt { height: 48px; }
+    #topmenu_lt .filler { background: url('/media/gfx/top/lt_bg.png') repeat-x; }
+        #topmenu_logo { background: url('/media/gfx/top/logo.png'); width: 215px; height: 77px; }
+        #topmenu_resource_tyt { width: 30px; background: url('/media/gfx/top/tyt.png'); }
+        #topmenu_resource_plu { width: 30px; background: url('/media/gfx/top/plu.png'); }
+        #topmenu_resource_men { width: 30px; background: url('/media/gfx/top/men.png'); }
+        #topmenu_prof { width: 88px; vertical-align: top; background: url('/media/gfx/top/lt_bg.png') repeat-x; }
+        #topmenu_exit { width: 36px; vertical-align: top; background: url('/media/gfx/top/lt_bg.png') repeat-x; }
+        #topmenu_lt_end { width: 2px; height: 77px; background: url('/media/gfx/top/upper_end.png'); height: 77px; }
+    #topmenu_lb { height: 29px; }
+    #topmenu_lb td { background: url('/media/gfx/top/lb_bg.png') repeat-x; height: 29px; }
+    #resources_titan, #resources_pluton, #resources_men { height: 29px; font-size: 12px; font-family: Tahoma; color: rgb(138, 255, 0); vertical-align: top; text-align: center; }
+
+    #topmenu_menu { border-spacing: 0; border-collapse: collapse; width: 928px; height: 28px; text-align: center; vertical-align: middle; }
+        #topmenu_decos { width: 2px; background: url('/media/gfx/top/menu_start.png'); }
+        #topmenu_decoe { width: 2px; background: url('/media/gfx/top/menu_end.png'); }
+    #topmenu_menu td.m_item { width: 103px; background: url('/media/gfx/top/menu_bg.png') repeat-x; font-family: Tahoma; font-size: 13px; color: white; }
+    #topmenu_menu td.m_item:hover { background: url('/media/gfx/top/hl_menu_bg.png') repeat-x; color: black; }
+
+div#mblock { margin-top: 2em; margin-bottom: 30px; width: 100%; }       /* content block */
+  #mblock_t { border-spacing: 0; border-collapse: collapse; }
+    #mblock_t1 { height: 51px; width: 37px; background: url('/media/gfx/mblock/up_l.png'); }
+    #mblock_t2 { height: 51px; width: 218px; background: url('/media/gfx/mblock/sth_up_l.png'); }
+    .mblock_namebg { height: 51px; width: 109px; background: url('/media/gfx/mblock/name_bg.png') repeat-x; }
+    #mblock_t3 { height: 51px; width: 201px; }
+    #mblock_t4 { height: 51px; width: 217px; background: url('/media/gfx/mblock/sth_up_r.png'); }
+    #mblock_t5 { height: 51px; width: 37px; background: url('/media/gfx/mblock/up_r.png'); }
+  #mblock_m { border-spacing: 0; border-collapse: collapse; }
+    #mblock_ml { width: 17px; background: url('/media/gfx/mblock/bg_l.png') repeat-y; }
+    #mblock_mm { width: 894px; background-color: rgb(29, 29, 29); }
+    #mblock_mr { width: 17px; background: url('/media/gfx/mblock/bg_r.png') repeat-y; }
+  #mblock_b { border-spacing: 0; border-collapse: collapse; }
+    #mblock_b1 { height: 39px; width: 37px; background: url('/media/gfx/mblock/down_l.png'); }
+    #mblock_b2 { height: 39px; width: 162px; background: url('/media/gfx/mblock/sth_down_l.png'); }
+    .mblock_bbg { height: 39px; width: 229px; background: url('/media/gfx/mblock/down_bg.png') repeat-x; }
+    #mblock_b3 { height: 39px; width: 72px; background: url('/media/gfx/mblock/down_center.png'); }
+    #mblock_b4 { height: 39px; width: 162px; background: url('/media/gfx/mblock/sth_down_r.png'); }
+    #mblock_b5 { height: 39px; width: 37px; background: url('/media/gfx/mblock/down_r.png'); }
+    
+                /* center padding - 33px left and right */
+           

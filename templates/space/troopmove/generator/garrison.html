@@ -1,0 +1,16 @@
+# coding=UTF-8
+<% from bellum.meta import MGID %>
+<% from bellum.common.fixtures.landarmy_stats import UNIT_NAMES %>
+% for i in xrange(0, MGID+1):
+    % if garrison[i] > 0:
+        <div class="garrison_box">
+            <div class="garrison_box_top">
+                <span>${UNIT_NAMES[race][i]}</span><br>
+                ${garrison[i]}
+            </div>
+            <div class="garrison_box_bottom">
+                <input type="text" id="box_st${i}" max="${garrison[i]}" name="st${i}" value="0">
+            </div>
+        </div>
+    % endif
+% endfor

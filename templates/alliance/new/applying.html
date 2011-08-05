@@ -1,0 +1,9 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/base/base.html" />
+<%def name="head()" ></%def>
+<%def name="caption()">soj</%def>
+<%def name="body()" >
+    <% from django.utils.html import escape %>
+    Aktualnie składasz podanie do sojuszu <a href="/alliance/view/${application.alliance.id}">[${escape(application.alliance.shname)}]${escape(application.alliance.name)}</a>
+    <br/><a href="/alliance/apply/cancel/">Nie, dziękuję</a>
+</%def>

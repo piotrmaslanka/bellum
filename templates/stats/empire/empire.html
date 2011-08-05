@@ -1,0 +1,351 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/base/base.html" />
+<%def name="head()" >
+    <script type="text/javascript" src="/media/js/countdown.js" ></script>
+    <link rel="stylesheet" type="text/css" href="/media/css/empire.css">
+    <script type="text/javascript" src="/media/js/scripts/script.js"></script>
+    <script type="text/javascript" src="/media/js/countdown.js" ></script>
+</%def>
+<%def name="caption()">imperium</%def>
+<%def name="body()" >
+    <% from django.utils.html import escape %>
+    <% from bellum.common.fixtures.landarmy_stats import UNIT_BASECLASS %>
+<table id="root">
+    <tr class="caption">
+        <td colspan="3" style="background: url('/media/gfx/empire/cat_bg.png') repeat-x; width: 446px;">
+            <img src="/media/gfx/empire/cat_left_end.png" class="a_left" alt="">
+            UŻYTKOWNIK
+            <img src="/media/gfx/empire/cat_mid.png" class="a_right" alt="">
+        </td>
+        <td class="brd_black_v"></td>
+        <td style="background: url('/media/gfx/empire/cat_mid.png');"></td>
+        <td colspan="3" style="background: url('/media/gfx/empire/cat_bg.png') repeat-x; width: 446px;">
+            SOJUSZ
+            <img src="/media/gfx/empire/cat_right_end.png" class="a_right" alt="">
+        </td>
+    </tr>
+
+    <tr class="txt">
+        <td class="txt_buf"></td>
+        <td class="txt_name">NAZWA</td>
+        <td class="txt_value">${escape(account.empire)}</td>
+        <td class="brd_black_v"></td>
+        <td class="brd_gray_v"></td>
+        % if alliance == None:
+            <td colspan="3" class="txt_name" style="text-align: center;">BRAK SOJUSZU</td>
+        % else:
+            <td class="txt_buf"></td>
+            <td class="txt_name">SOJUSZ</td>
+            <td class="txt_value">${escape(alliance.name)} (${escape(alliance.shname)})</td>
+        % endif
+    </tr>
+
+    <tr><td colspan="8" class="brd_black_h"></td></tr>
+    <tr><td colspan="3" class="brd_gray_h"></td><td class="brd_black_h"></td><td colspan="4" class="brd_gray_h"></td></tr>
+
+    <tr class="txt">
+        <td class="txt_buf"></td>
+        <td class="txt_name">STATEK</td>
+        <td class="txt_value">${escape(mother.name)}</td>
+        <td class="brd_black_v"></td>
+        <td class="brd_gray_v"></td>
+        % if alliance == None:
+            <td colspan="3"></td>
+        % else:
+            <td class="txt_buf"></td>
+            <td class="txt_name">CZŁONKÓW</td>
+            <td class="txt_value">${alliance.members}</td>
+        % endif
+    </tr>
+
+    <tr><td colspan="8" class="brd_black_h"></td></tr>
+    <tr><td colspan="3" class="brd_gray_h"></td><td class="brd_black_h"></td><td colspan="4" class="brd_gray_h"></td></tr>
+
+    <tr class="txt">
+        <td class="txt_buf"></td>
+        <td class="txt_name">PROWINCJE</td>
+        <td class="txt_value">
+            ${province_count} <span class="txt_override">NA</span> ${planet_count} <span class="txt_override"> PLANETACH</span>
+        </td>
+        <td class="brd_black_v"></td>
+        <td class="brd_gray_v"></td>
+        % if alliance == None:
+            <td colspan="3"></td>
+        % else:
+            <td class="txt_buf"></td>
+            <td class="txt_name">RANGA</td>
+            <td class="txt_value">${alliance_m.rank}</td>
+        % endif
+    </tr>
+
+    <tr><td colspan="8" class="brd_black_h"></td></tr>
+    <tr><td colspan="3" class="brd_gray_h"></td><td class="brd_black_h"></td><td colspan="4" class="brd_gray_h"></td></tr>
+
+    <tr class="txt">
+        <td class="txt_buf"></td>
+        <td class="txt_name">WOJSKO W PRODUKCJI</td>
+        <td class="txt_value">
+            <span class="txt_override"></span> ${queued_troop_count} <span class="txt_override"></span>
+        </td>
+        <td class="brd_black_v"></td>
+        <td class="brd_gray_v"></td>
+        <td colspan="3"></td>
+    </tr>
+
+    <tr><td colspan="8" class="brd_black_h"></td></tr>
+    <tr><td colspan="3" class="brd_gray_h"></td><td class="brd_black_h"></td><td colspan="4" class="brd_gray_h"></td></tr>
+
+    <tr class="txt">
+        <td class="txt_buf"></td>
+        <td class="txt_name">RANKING</td>
+        <td class="txt_value">
+            % if player_ranking == None:
+                ???
+            % else:
+                ${player_ranking.id}
+            % endif
+            <span class="txt_value_fltright">
+            % if player_ranking == None:
+                
+            % elif player_ranking.delta < 0:
+                <img src="/media/gfx/empire/down.png" alt="Spadł"> ${abs(player_ranking.delta)}
+            % elif player_ranking.delta == 0:
+                <img src="/media/gfx/empire/nomove.png" alt="Stoi">
+            % else:
+                <img src="/media/gfx/empire/up.png" alt="Wzrósł"> ${player_ranking.delta}
+            % endif
+            </span>
+        </td>
+        <td class="brd_black_v"></td>
+        <td class="brd_gray_v"></td>
+        % if alliance == None:
+            <td colspan="3"></td>
+        % else:
+            <td class="txt_buf"></td>
+            <td class="txt_name">RANKING</td>
+            <td class="txt_value">
+                % if alliance_ranking == None:
+                    ???
+                % else:
+                    ${alliance_ranking.id}
+                % endif
+            <span class="txt_value_fltright">
+                % if alliance_ranking == None:
+
+                % elif alliance_ranking.delta < 0:
+                    <img src="/media/gfx/empire/down.png" alt="Spadł"> ${abs(alliance_ranking.delta)}
+                % elif alliance_ranking.delta == 0:
+                    <img src="/media/gfx/empire/nomove.png" alt="Stoi">
+                % else:
+                    <img src="/media/gfx/empire/up.png" alt="Wzrósł"> ${alliance_ranking.delta}
+                % endif
+            </span>
+            </td>
+        % endif
+    </tr>
+
+    <!--   KOLEJKA -->
+    <tr class="caption">
+        <td colspan="8" style="background: url('/media/gfx/empire/cat_bg.png') repeat-x;">
+            <img src="/media/gfx/empire/cat_left_end.png" class="a_left" alt="">
+            KOLEJKA
+            <img src="/media/gfx/empire/cat_right_end.png" class="a_right" alt="">
+       </td>
+    </tr>
+
+    <tr style="height: 15px;"><td colspan="3"></td><td class="brd_black_v"></td><td class="brd_gray_v"></td><td colspan="3"></td></tr>
+
+    <tr>
+       <td class="queue_label" colspan="3">PRODUKCJA</td>
+       <td class="brd_black_v"></td>
+       <td class="brd_gray_v"></td>
+       <td class="queue_label" colspan="3">ULEPSZANIE / BUDOWANIE</td>
+    </tr>
+
+    <tr style="height: 15px;"><td colspan="3"></td><td class="brd_black_v"></td><td class="brd_gray_v"></td><td colspan="3"></td></tr>
+
+    <tr>
+        <td class="queue_icons" colspan="3">
+            <% from bellum.stats.views.empire import htmlize_salad, htmlize_provbuild, htmlize_reloc, htmlize_produceorder, htmlize_researchorder, htmlize_constructorder, htmlize_provstrike, htmlize_planstrike, htmlize_evac %>
+            % for tt in troops_training:
+                <div onmouseover="tooltip.show('${htmlize_produceorder(tt, race)}')" onmouseout="tooltip.hide()">
+                    <a href="/mother/garrison/land">
+                    % if UNIT_BASECLASS[pgo.race][tt.sold_nr] == 0:
+                        <img src="/media/gfx/empire/infantry.png" alt="">
+                    % elif UNIT_BASECLASS[pgo.race][tt.sold_nr] == 1:
+                        <img src="/media/gfx/empire/armor.png" alt="">
+                    % elif UNIT_BASECLASS[pgo.race][tt.sold_nr] == 2:
+                        <img src="/media/gfx/empire/support.png" alt="">
+                    % endif
+                    </a>
+                </div>
+                <script type="text/javascript">countdown('gto_lpr_${tt.id}',${tt.got.secondsToCompletion()})</script>
+            % endfor
+        </td>
+        <td class="brd_black_v"></td>
+        <td class="brd_gray_v"></td>
+        <td class="queue_icons" colspan="3">
+            % for uu in researches:
+                <div onmouseover="tooltip.show('${htmlize_researchorder(uu)}')" onmouseout="tooltip.hide()">
+                    <a href="/mother/overview/">
+                    <img src="/media/gfx/empire/tech.png" alt="Rozwój technologii">
+                    </a>
+                </div>
+                <script type="text/javascript">countdown('gto_rsr_${uu.id}',${uu.got.secondsToCompletion()})</script>
+            % endfor
+            % for uu in mother_builds:
+                <div div onmouseover="tooltip.show('${htmlize_constructorder(uu)}')" onmouseout="tooltip.hide()">
+                    <a href="/mother/overview/">
+                    <img src="/media/gfx/empire/build.png" alt="Budowa na matce">
+                    </a>
+                </div>
+                <script type="text/javascript">countdown('gto_cst_${uu.id}',${uu.got.secondsToCompletion()})</script>
+            % endfor
+            % for uu in prov_builds:
+                <div div onmouseover="tooltip.show('${htmlize_provbuild(uu)}')" onmouseout="tooltip.hide()">
+                    <a href="/space/planetview/${uu.ppresence.province.planet.id}/?province=${uu.ppresence.province.id}">
+                    <img src="/media/gfx/empire/build.png" alt="Budowa na prowincji">
+                    </a>
+                </div>
+                <script type="text/javascript">countdown('gto_pbd_${uu.id}',${uu.got.secondsToCompletion()})</script>
+            % endfor
+        </td>
+    </tr>
+
+    <tr style="height: 15px;"><td colspan="3"></td><td class="brd_black_v"></td><td class="brd_gray_v"></td><td colspan="3"></td></tr>
+    <tr><td colspan="8" class="brd_black_h"></td></tr>
+    <tr><td colspan="8" class="brd_gray_h"></td></tr>
+
+    <tr style="height: 26px;"><td colspan="8"></td></tr>
+    <tr><td class="queue_label" colspan="8">RUCH / ATAKI</td></tr>
+    <tr style="height: 15px;"><td colspan="8"></td></tr>
+    <% from bellum.common.alliance import isAllied %>
+    <tr>
+        <td class="queue_icons" colspan="8">
+            % for f in prov_inbounds:
+                <div onmouseover="tooltip.show('${htmlize_provstrike(f)}')" onmouseout="tooltip.hide()">
+                    <a href="/space/planetview/${f.dstprovince.planet.id}/?province=${f.dstprovince.id}">
+                    % if isAllied(account, f.attacker, alliance):
+                        <img src="/media/gfx/empire/atk_f.png" alt="Cudzy ruch - sojusznik">
+                    % else:
+                        <img src="/media/gfx/empire/atk_e.png" alt="Cudzy ruch - wróg">
+                    % endif
+                    </a>
+                <script type="text/javascript">countdown('gto_pstr_${f.id}',${f.got.secondsToCompletion()})</script>
+                </div>
+            % endfor
+            % for f in prov_outbounds:
+                <div onmouseover="tooltip.show('${htmlize_provstrike(f, display_garrison=True)}')" onmouseout="tooltip.hide()">
+                    <a href="/space/planetview/${f.dstprovince.planet.id}/?province=${f.dstprovince.id}">
+                    <img src="/media/gfx/empire/atk_m.png" alt="Mój ruch">
+                    </a>
+                </div>
+                <script type="text/javascript">countdown('gto_pstr_${f.id}',${f.got.secondsToCompletion()})</script>
+            % endfor
+            % for f in mother_inbounds:
+                <div onmouseover="tooltip.show('${htmlize_planstrike(f, display_garrison=True)}')" onmouseout="tooltip.hide()">
+                    <a href="/space/planetview/${f.province.planet.id}/?province=${f.province.id}">
+                    <img src="/media/gfx/empire/ass_m.png" alt="Mój zrzut">
+                    </a>
+                </div>
+                <script type="text/javascript">countdown('gto_drop_${f.id}',${f.got.secondsToCompletion()})</script>
+            % endfor
+            % for f in foreign_mother_inbounds:
+                <div onmouseover="tooltip.show('${htmlize_planstrike(f)}')" onmouseout="tooltip.hide()">
+                    <a href="/space/planetview/${f.province.planet.id}/?province=${f.province.id}">
+                    % if isAllied(account, f.mother.owner, alliance):
+                        <img src="/media/gfx/empire/ass_f.png" alt="Cudzy zrzut - sojusznik">
+                    % else:
+                        <img src="/media/gfx/empire/ass_e.png" alt="Cudzy zrzut - wróg">
+                    % endif
+                    </a>
+                </div>
+                <script type="text/javascript">countdown('gto_drop_${f.id}',${f.got.secondsToCompletion()})</script>
+            % endfor
+            % for f in my_evacs:
+                <div onmouseover="tooltip.show('${htmlize_evac(f)}')" onmouseout="tooltip.hide()">
+                    <a href="/space/planetview/${f.province.planet.id}/?province=${f.province.id}">
+                    <img src="/media/gfx/empire/evac.png" alt="Ewakuacja">
+                    </a>
+                </div>
+                <script type="text/javascript">countdown('gto_evac_${f.id}',${f.got.secondsToCompletion()})</script>
+            % endfor
+            % if mother.isRelocating():
+                <div onmouseover="tooltip.show('${htmlize_reloc(mother)}')" onmouseout="tooltip.hide()">
+                    <a href="/space/planetview/${mother.duePosition().id}/">
+                    <img src="/media/gfx/empire/rel.png" alt="Relokacja">
+                    </a>
+                </div>
+                <script type="text/javascript">countdown('gto_rlc_${mother.id}',${mother.getRelocation().got.secondsToCompletion()})</script>               
+            % endif
+            % for s in inbound_salad:
+                <div onmouseover="tooltip.show('${htmlize_salad(s, False)}')" onmouseout="tooltip.hide()">
+                    <a href="/uprofile/view/${s.send_from.owner.id}">
+                    % if isAllied(account, s.send_from.owner, alliance):
+                        <img src="/media/gfx/empire/salad_f.png" alt="Przychodzące surowce - od sojusznika">
+                    % else:
+                        <img src="/media/gfx/empire/salad_e.png" alt="Przychodzące surowce - od wroga">
+                    % endif
+                    </a>
+                </div>
+                <script type="text/javascript">countdown('gto_sld_${s.id}',${s.got.secondsToCompletion()})</script>
+            % endfor
+            % for s in outbound_salad:
+                <div onmouseover="tooltip.show('${htmlize_salad(s, True)}')" onmouseout="tooltip.hide()">
+                    <a href="/uprofile/view/${s.send_to.owner.id}">
+                    <img src="/media/gfx/empire/salad_m.png" alt="Wysyłam surowce">
+                    </a>
+                </div>
+                <script type="text/javascript">countdown('gto_sld_${s.id}',${s.got.secondsToCompletion()})</script>
+            % endfor
+        </td>
+    </tr>
+
+    <tr style="height: 36px;"><td colspan="8"></td></tr>
+
+    <tr class="caption">
+        <td colspan="8" style="background: url('/media/gfx/empire/cat_bg.png') repeat-x;">
+            <img src="/media/gfx/empire/cat_left_end.png" class="a_left" alt="">
+            PROWINCJE
+            <img src="/media/gfx/empire/cat_right_end.png" class="a_right" alt="">
+       </td>
+    </tr>
+
+    <% planet_c_marker = 0 %>
+    % for planet in planets:
+
+        % if planet_c_marker % 2 == 0:
+            <tr>
+        % else:
+            <td class="brd_black_v"></td>
+            <td class="brd_gray_v"></td>
+        % endif
+
+        <td colspan="3" class="province_td">
+            ${escape(planet.name)}
+            <div class="province_imgs">
+                % for province in planet.province_set.all():
+                <div class="province_img" onclick="window.location = '/space/planetview/${planet.id}/?province=${province.id}'">
+                    <span class="c${allegiance_tab[province.id]}">${province.planet_count_number+1}</span>
+                </div>
+                % endfor
+            </div>
+        </td>
+
+        % if planet_c_marker % 2 == 1:
+            </tr>
+            <tr><td colspan="8" class="brd_black_h"></td></tr>
+            <tr><td colspan="8" class="brd_gray_h"></td></tr>
+        % endif
+        <% planet_c_marker += 1 %>
+    % endfor
+
+    % if planet_c_marker % 2 == 1:
+        <td class="brd_black_v"></td>
+        <td class="brd_gray_v"></td>
+        <td colspan="3"></td></tr>
+        <tr><td colspan="8" class="brd_black_h"></td></tr>
+        <tr><td colspan="8" class="brd_gray_h"></td></tr>
+    % endif
+</table>
+</%def>

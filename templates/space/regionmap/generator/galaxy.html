@@ -1,0 +1,12 @@
+# coding=UTF-8
+<table id="galaxytab">
+    % for y in xrange(0, 10):
+    <tr>
+        % for x in xrange(0, 10):
+        <td>
+            <img src="/media/sector_images/g${x}-${y}.png" alt="" onclick="cr_g_toRegion(${x}, ${y})">
+        </td>
+        % endfor
+    </tr>
+    % endfor
+</table>

@@ -1,0 +1,131 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/base/base.html" />
+<%def name="head()" >
+    <script type="text/javascript" src="/media/js/countdown.js" ></script>
+    <script type="text/javascript" src="/media/js/income.js" ></script>
+    <link rel="stylesheet" type="text/css" href="/media/js/scripts/style.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/income.css">
+</%def>
+<%def name="caption()">wydobycie</%def>
+<%def name="body()" >
+    <% from django.utils.html import escape %>
+    <table id="income_table">
+       <tr class="descriptor">
+           <td><img class="descriptor_img" src="/media/gfx/income/cat_sm.png"></td>
+           <td><img src="/media/gfx/income/tyt.png"></td>
+           <td><img src="/media/gfx/income/plu.png"></td>
+           <td><img src="/media/gfx/income/man.png"></td>
+           <td class="nobg"></td>
+       </tr>
+       <tr><td colspan="5" class="break13"></td></tr>
+
+       <!-- mother section -->
+       <tr class="section_header">
+           <td>${escape(mother_name)}</td>
+           <td>${zero(mother.ratio_titan)}</td>
+           <td>${zero(mother.ratio_pluton)}</td>
+           <td>${zero(mother.ratio_men)}</td>
+           <td class="nobg"></td>
+       </tr>
+       <tr class="underhighlighter">
+           <td colspan="4"></td>
+           <td></td>
+       </tr>
+
+    % if provinces != {}:
+          <!-- province section -->
+            <tr class="descriptor">
+                <td><img class="descriptor_img" src="/media/gfx/income/cat_p.png"></td>
+                <td colspan="4"></td>
+            </tr>
+            <tr><td colspan="5" class="break13"></td></tr>
+
+       % for planet_id, presence_tabs in provinces.iteritems():
+           <tr class="section_header">
+               <td>${escape(planet_id_to_name[planet_id])}</td>
+               <td>${zero(planet_sums[planet_id].ratio_titan)}</td>
+               <td>${zero(planet_sums[planet_id].ratio_pluton)}</td>
+               <td>${zero(planet_sums[planet_id].ratio_men)}</td>
+               <td><img id="mb${planet_id}" src="/media/gfx/income/minimize.png" onclick="minimax(${planet_id})"></td>
+           </tr>
+
+           <% pt = 0 %>
+           % for prov_id, prov_name, income in presence_tabs:
+                % if pt == 0:
+                    <tr id="pi${planet_id}i${pt}" class="province" style="background: url('/media/gfx/income/subsec_bg_shdw.png') repeat-x;">
+                % elif (pt % 2)==1:
+                   <tr id="pi${planet_id}i${pt}" class="province" style="background-color: rgb(70, 70, 70);">
+                % else:
+                   <tr id="pi${planet_id}i${pt}" class="province" style="background-color: rgb(84, 84, 84);">
+                % endif
+                <td><a href="/space/planetview/${planet_id}/?province=${prov_id}">${prov_name}</a></td>
+                <td>${zero(income.ratio_titan)}</td>
+                <td>${zero(income.ratio_pluton)}</td>
+                <td>${zero(income.ratio_men)}</td>
+                <td></td>
+            </tr>
+            <% pt += 1 %>
+           % endfor
+       % endfor
+
+       <tr class="underhighlighter">
+           <td colspan="4"></td>
+           <td></td>
+       </tr>
+    % endif
+
+
+    <!-- technology tab -->
+   <tr class="descriptor">
+       <td><img class="descriptor_img" src="/media/gfx/income/cat_t.png"></td>
+       <td colspan="4"></td>
+   </tr>
+   <tr><td colspan="5" class="break13"></td></tr>
+
+   <tr class="section_header">
+       <td>Wydobycie</td>
+       <td>+${account.technology.o_2 * 5}%</td>
+       <td>+${account.technology.o_2 * 5}%</td>
+       <td>n/a</td>
+       <td class="nobg"></td>
+   </tr>
+   <tr class="section_header">
+       <td>Wiertła diamentowe</td>
+       <td>+${account.technology.o_3 * 20}%</td>
+       <td>+${account.technology.o_3 * 20}%</td>
+       <td>n/a</td>
+       <td></td>
+   </tr>
+   <tr class="underhighlighter">
+       <td colspan="4"></td>
+       <td></td>
+   </tr>
+
+   <tr class="descriptor">
+       <td><img class="descriptor_img" src="/media/gfx/income/cat_ov.png"></td>
+       <td colspan="4"></td>
+   </tr>
+   <tr><td colspan="5" class="break13"></td></tr>
+
+   <tr class="section_header">
+       <td><span class="zusammen">Na godzinę</span></td>
+       <td><span class="zusammen">${int(round(pgo.resources.ratio_titan*3600))}</span></td>
+       <td><span class="zusammen">${int(round(pgo.resources.ratio_pluton*3600))}</span></td>
+       <td><span class="zusammen">${int(round(pgo.resources.ratio_men*3600))}</span></td>
+       <td class="nobg"></td>
+   </tr>
+   <tr class="section_header">
+       <td><span class="zusammen">Na dobę</span></td>
+       <td><span class="zusammen">${int(round(pgo.resources.ratio_titan*86400))}</span></td>
+       <td><span class="zusammen">${int(round(pgo.resources.ratio_pluton*86400))}</span></td>
+       <td><span class="zusammen">${int(round(pgo.resources.ratio_men*86400))}</span></td>
+       <td class="nobg"></td>
+   </tr>
+   <tr class="underhighlighter">
+       <td></td>
+       <td></td>
+   </tr>
+
+
+    </table>
+</%def>

@@ -1,0 +1,49 @@
+#registration
+{
+    width: 458px;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    margin-top: -150px;
+    left: 50%;
+    margin-left: -229px;
+}
+
+#titular {
+    width: 458px;
+    position: relative;
+    height: 45px;
+}
+#t_logo {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+#t_04 {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+#textbox {
+    background: url('/media/gfx/registration/combo.png');
+    padding-left: 40px;
+    padding-right: 40px;
+    width: 378px;
+    padding-top: 30px;
+    color: white;
+    font-family: Tahoma;
+    font-size: 14px;
+    padding-bottom: 30px;
+}
+
+#hasaccount {
+    width: 100%;
+    height: 45px;
+    text-align: center;
+    font-size: 11px;
+    font-family: Tahoma;
+    color: rgb(123, 123, 123);
+    background: url('/media/gfx/registration/18.png');
+}
+    #hasaccount table { width: 100%; height: 45px; }

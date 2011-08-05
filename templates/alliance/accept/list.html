@@ -1,0 +1,63 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/base/base.html" />
+<%def name="caption()">soj</%def>
+<%def name="head()" >
+    <link rel="stylesheet" type="text/css" href="/media/css/alliance.css">
+    <script type="text/javascript" src="/media/ajax/baseajax.js" ></script>
+    <link rel="stylesheet" type="text/css" href="/media/css/alliance-apps.css">
+    <script type="text/javascript" src="/media/ajax/alliance_management.js" ></script>
+    <script type="text/javascript" src="/media/js/scripts/script.js"></script>
+</%def>
+<%def name="body()" >
+    <% from bellum.alliance.models import AllianceApplication %>
+    <% from django.utils.html import escape %>
+    <% from bellum.alliance.models import AM_PRIVILEGE, AM_KICK, AM_TEAMSITE, AM_ACCEPT %>
+
+    <div id="top_bar">
+        <div id="top_bar_buttons">
+            <div class="top_bar_button" id="top_bar_button_hl" onclick="window.location='/alliance/view/own/'">PROFIL</div>
+            <div class="top_bar_button">SOJUSZ</div>
+        </div>
+        <div id="top_bar_title">
+            % if membership.alliance.is_avatar == 0:
+                <img src="/media/gfx/alliance/a_img.png" alt="Mordy">
+            % elif membership.alliance.is_avatar == 1:
+                <img src="/media/avatars/a${membership.alliance.id}.png" alt="Awatar">
+            % elif membership.alliance.is_avatar == 2:
+                <img src="/media/avatars/a${membership.alliance.id}.gif" alt="Awatar">
+            % endif
+                ${escape(membership.alliance.name)}
+                &nbsp;<span>${escape(membership.alliance.shname)}</span>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div id="subcat_bar">
+        % if membership.hasPrivilege(AM_ACCEPT):
+            <div style="background: url('/media/gfx/alliance/hl_subcat.png'); color: rgb(15, 15, 17);">PODANIA</div>
+        % endif
+        <div onclick="window.location='/alliance/members/'">CZŁONKOWIE</div>
+         % if membership.account == membership.alliance.leader:
+            <div onclick="if (confirm('NA PEWNO CHCESZ ROZWIĄZAĆ SOJUSZ???')) disband()">ROZWIĄŻ</div>
+        % else:
+            <div onclick="if (confirm('NA PEWNO CHCESZ OPUŚCIĆ SOJUSZ???')) leave()">OPUŚĆ</div>
+        % endif
+        % if membership.hasPrivilege(AM_TEAMSITE):
+            <div onclick="window.location='/alliance/teamsite/'">OPIS</div>
+        % endif
+        <div onclick="window.location='http://forum.thebellum.pl/index.php/board,${membership.alliance.smf_board_id}.0.html'">FORUM</div>
+    </div>
+
+    % for app in entries:
+        <div class="app_hdr"><a href="/uprofile/view/${app.applicant.id}/">${escape(app.applicant.empire)}</a>
+
+
+        </div>
+        <div class="app_txt">
+            <img onmouseover="tooltip.show('Jestem na nie - odrzuć')" onmouseout="tooltip.hide()" alt="ODRZUĆ" src="/media/gfx/alliance/no.png" onclick="application_reject(${app.id})" onmouseover="gmbHighlight(this)" onmouseout="gmbUnhighlight(this)">
+            <img onmouseover="tooltip.show('Lubię to - przyjmij')" onmouseout="tooltip.hide()" alt="PRZYJMIJ" src="/media/gfx/alliance/yes.png" onclick="application_accept(${app.id})" onmouseover="gmbHighlight(this)" onmouseout="gmbUnhighlight(this)">
+            ${escape(app.message).replace('\n', '<br>')}
+        </div>
+    % endfor
+
+</%def>

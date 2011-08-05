@@ -1,0 +1,18 @@
+# coding=UTF-8
+Witaj,
+
+Poprosiłeś o wygenerowanie nowego hasła dla swojego konta w grze internetowej Bellum. Starego przywrócić się nie da - hasła przechowywane są w bazie w taki sposób, że gdyby hakerzy przechwycili je to nie będą z nimi nic w stanie zrobić. Jeśli zagadnienie cię interesuje, poczytaj sobie o tzw. bezpiecznych funkcjach skrótu.
+
+Login: ${login}
+Nowe hasło: ${newpass}
+Nazwa imperium: ${accname}
+
+Aby to hasło weszło w życie, musisz najpierw potwierdzić że faktycznie chciałeś zmiany hasła. W tym celu udaj się na adres:
+http://www.thebellum.pl/register/passremind/activate/?key=${key}
+
+Jeśli to nie ty prosiłeś o zmianę hasła, lub nawet nie posiadasz konta na Bellum, zignoruj tą wiadomość. Powyższy link wygaśnie w ciągu tygodnia i все хорошо. Do czasu kliknięcia w powyższego linka obowiązuje stare hasło.
+
+Wiadomość co prawda generowana jest automatycznie, jednak zawsze możesz na nią odpowiedzieć, gdyż skrzynka jest monitorowana.
+
+Pozdrawiamy i życzymy miłej gry,
+Administracja www.thebellum.pl

@@ -1,0 +1,16 @@
+# coding=UTF-8
+<table id="regiontab">
+    % for y in xrange(-7, 8):
+    <tr>
+        % for x in xrange(-7, 8):
+        <td>
+            % if (y+by<0) or (y+by>99) or (x+bx<0) or (x+bx>99):
+                <!-- です -->
+            % else:
+                <img src="/media/sector_images/s${x+bx}-${y+by}.png" alt="" onclick="cr_r_toSector(${x+bx}, ${y+by})">
+            % endif
+        </td>
+        % endfor
+    </tr>
+    % endfor
+</table>

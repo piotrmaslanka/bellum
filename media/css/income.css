@@ -1,0 +1,51 @@
+#income_table {
+    width: 760px;
+    margin-left: 67px;
+    margin-right: 40px;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+tr.descriptor td {
+    height: 27px;
+    text-align: center;
+    vertical-align: middle;
+    width: 190px;
+}
+tr.descriptor td:first-child { text-align: left; }
+    .descriptor_img { padding-left: 20px; }
+tr.descriptor td:last-child { background: url('/media/gfx/mblock/content_bg.png') repeat; width: 27px; }
+
+
+.break13 { height: 13px; }
+.break25 { height: 25px; }
+
+tr.section_header { background: url('/media/gfx/income/sec_bg.png') repeat-x; }
+tr.section_header td {
+    height: 27px;
+    vertical-align: middle;
+    text-align: center; color: white; font-size: 14px;
+    background: url('/media/gfx/income/sec_div.png') left top no-repeat;
+}
+tr.section_header td:first-child { background: url('/media/gfx/income/sec_start.png') left top no-repeat; }
+tr.section_header td:last-child { vertical-align: top; background-color: rgb(29, 29, 29); width: 27px; }
+
+tr.province td {
+    color: rgb(185, 185, 185);
+    text-align: center;
+    vertical-align: middle;
+    height: 25px;
+}
+
+tr.province td:first-child {
+    padding-left: 13px;
+    text-align: left;
+}
+tr.province td:last-child { background-color: rgb(29, 29, 29); width: 27px; }
+
+
+.zusammen { color: rgb(121, 255, 12); }
+
+tr.underhighlighter td:first-child { height: 25px; background: url('/media/gfx/income/undersec.png') repeat-x;  }
+
+.zero { color: rgb(126, 126, 126); }

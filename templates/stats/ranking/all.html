@@ -1,0 +1,91 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/base/base.html" />
+<%def name="head()" >
+    <link rel="stylesheet" type="text/css" href="/media/css/ranking.css">
+</%def>
+<%def name="caption()">ranking</%def>
+<%def name="body()" >
+    <% from django.utils.html import escape %>
+    <% from bellum.common.utils import coma %>
+
+    <div id="top_bar">
+        <div id="top_bar_buttons">
+            <div class="top_bar_button" id="top_bar_button_hl">WSZYSTKO</div>
+            <div class="top_bar_button" onclick="window.location='/stats/ranking/mother/'">STATEK</div>
+            <div class="top_bar_button" onclick="window.location='/stats/ranking/army/'" >WOJSKO</div>
+            <div class="top_bar_button" onclick="window.location='/stats/ranking/allied/'">SOJUSZ</div>
+        </div>
+        <div id="top_bar_title">Ranking graczy</div>
+        <div class="clear"></div>
+    </div>
+
+    <table id="ranking_tab">
+        % for r in ranking:
+        % if account.id == r.account.id:
+            <tr id="ranking_row_mine" style="background: url('/media/gfx/ranking/me_bg.png') repeat-x;">
+        % else:
+            <tr>
+        % endif
+            <td class="s1"></td>
+            <td class="nr">${r.id}.</td>
+            <td class="s2"></td>
+            <td class="name" onclick="window.location='/uprofile/view/${r.account_id}/'">
+                % if r.alliance_id:
+                    [${escape(r.shname)}] ${escape(r.empire)}
+                % else:
+                    ${escape(r.empire)}
+                % endif
+            </td>
+            <td class="s3"></td>
+            <td class="extra"></td>
+            <td class="s4"></td>
+            <td class="s5"></td>
+            <td class="score">${coma(r.points)}</td>
+            <td class="s6"></td>
+            <td class="deltaimg">
+                % if r.delta > 0:
+                    <img src="/media/gfx/ranking/up.png" alt="Podniósł się">
+                % elif r.delta == 0:
+                    <img src="/media/gfx/ranking/nomove.png" alt="Stoi">
+                % else:
+                    <img src="/media/gfx/ranking/down.png" alt="Spadł">
+                % endif
+            </td>
+            <td class="delta">
+                % if r.delta != 0:
+                    ${abs(r.delta)}
+                % endif
+            </td>
+        </tr>
+        % endfor
+    </table>
+
+    <div id="blocks">
+        % if page == 1:
+            <div id="b_sharpleft"></div>
+            <div id="b_left"></div>
+        % else:
+            <div id="b_sharpleft" onclick="window.location='/stats/ranking/all/1/'"></div>
+            <div id="b_left" onclick="window.location='/stats/ranking/all/${page-1}/'"></div>
+        % endif
+
+        % for pg in pages:
+            <div class="b_page">
+                % if pg == page:
+                    <span>${pg}</span>
+                % else:
+                    <span><a href="/stats/ranking/all/${pg}/">${pg}</a></span>
+                % endif
+            </div>
+        % endfor
+
+        % if page == pagecount:
+            <div id="b_right"></div>
+            <div id="b_sharpright"></div>
+        % else:
+            <div id="b_right" onclick="window.location='/stats/ranking/all/${page+1}/'"></div>
+            <div id="b_sharpright" onclick="window.location='/stats/ranking/all/${pagecount}/'"></div>
+        % endif
+    </div>
+
+</%def>

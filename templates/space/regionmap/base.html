@@ -1,0 +1,50 @@
+# coding=UTF-8
+<%inherit file="/base/base.html" />
+<%def name="caption()">map</%def>
+<%def name="head()" >
+		<script type="text/javascript" src="/media/ajax/regionmap.js" ></script>
+                <link rel="stylesheet" type="text/css" href="/media/css/regionmap.css">
+                <script type="text/javascript">
+                    var g_current_x = ${x};
+                    var g_current_y = ${y};
+                    var g_mothership_x = ${mx};
+                    var g_mothership_y = ${my};
+                    var g_current_mode = 'sector';
+                </script>
+</%def>
+<%def name="body()" >
+    <div id="buttons">
+        <div id="gameboy">  <!-- Tm R C by Nintendo Hard. Tato kup mi gemboja -->
+            <table>
+                <tr>
+                    <td></td>
+                    <td><img src="/media/gfx/regionmap/up.png" alt="Góra" onclick="cr_up()" onmouseover="gmbHighlight(this)" onmouseout="gmbUnhighlight(this)"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="/media/gfx/regionmap/left.png" alt="Lewo" onclick="cr_left()" onmouseover="gmbHighlight(this)" onmouseout="gmbUnhighlight(this)"></td>
+                    <td><img src="/media/gfx/regionmap/hq.png" alt="HQ" onclick="cr_hq()" onmouseover="gmbHighlight(this)" onmouseout="gmbUnhighlight(this)"></td>
+                    <td><img src="/media/gfx/regionmap/right.png" alt="Prawo" onclick="cr_right()" onmouseover="gmbHighlight(this)" onmouseout="gmbUnhighlight(this)"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><img src="/media/gfx/regionmap/down.png" alt="Dół" onclick="cr_down()" onmouseover="gmbHighlight(this)" onmouseout="gmbUnhighlight(this)"></td>
+                    <td></td>                    
+                </tr>
+            </table>
+        </div>
+        <div id="secreggal">
+            <img id="mrks" src="/media/gfx/regionmap/hl_s.png" onclick="cr_s()" alt="Sektor">
+            <img id="mrkr"src="/media/gfx/regionmap/r.png" onclick="cr_r()" alt="Region">
+            <img id="mrkg" src="/media/gfx/regionmap/g.png" onclick="cr_g()" alt="Galaktyka">
+            <div id="coords">
+                Współrzędne: <span id="x">${x}</span>:<span id="y">${y}</span>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="map_content">
+        ${fillin_map_content}
+    </div>
+    <script type="text/javascript" src="/media/js/scripts/script.js"></script>
+</%def>

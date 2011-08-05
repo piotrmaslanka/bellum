@@ -1,0 +1,44 @@
+div#top_bar
+{
+    height: 30px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    width: 100%;
+    font-family: Verdana;
+    background: url('/media/gfx/uprofile/cat_bg.png') repeat-x;
+}
+    #top_bar_title {
+        padding-left: 10px;
+        font-size: 24px;
+        color: rgb(231, 199, 33);
+        font-family: Arial;
+        vertical-align: top;
+    }
+    #top_bar_title img { padding-right: 15px; }
+    #top_bar_title span {
+        font-size: 15px;
+    }
+
+    #top_bar_buttons {
+        float: right;
+        padding-right: 5px;
+    }
+
+    .top_bar_button {
+        width: 139px;
+        height: 24px;
+        margin-left: 3px;
+        margin-right: 3px;
+        text-align: center;
+        display: inline-block;
+        font-size: 13px;
+        font-weight: bold;
+        padding-top: 6px;
+        color: rgb(231, 199, 33);
+        background: url('/media/gfx/uprofile/cat.png');
+    }
+
+    #top_bar_button_hl {
+        color: rgb(15, 15, 17);
+        background: url('/media/gfx/uprofile/hl_cat.png');
+    }

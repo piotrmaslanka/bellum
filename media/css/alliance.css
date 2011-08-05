@@ -1,0 +1,64 @@
+/* generic alliance pages */
+div#top_bar
+{
+    height: 30px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    width: 100%;
+    font-family: Verdana;
+    background: url('/media/gfx/alliance/cat_bg.png') repeat-x;
+}
+    #top_bar_title {
+        padding-left: 10px;
+        font-size: 24px;
+        color: rgb(231, 199, 33);
+        font-family: Arial;
+        vertical-align: top;
+    }
+    #top_bar_title img { padding-right: 15px; }
+    #top_bar_title span {
+        font-size: 15px;
+    }
+
+    #top_bar_buttons {
+        float: right;
+        padding-right: 5px;
+    }
+
+    .top_bar_button {
+        width: 139px;
+        height: 24px;
+        margin-left: 3px;
+        margin-right: 3px;
+        background: url('/media/gfx/alliance/hl_cat.png');
+        text-align: center;
+        display: inline-block;
+        font-size: 13px;
+        font-weight: bold;
+        padding-top: 6px;
+        color: rgb(15, 15, 17);
+    }
+
+    #top_bar_button_hl {
+        color: rgb(231, 199, 33);
+        background: url('/media/gfx/alliance/cat.png');
+    }
+
+#subcat_bar {
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding-left: 20px;
+}
+    #subcat_bar > div {
+        width: 139px;
+        padding-top: 6px;
+        height: 24px;
+        color: rgb(130, 130, 130);
+        margin-right: 10px;
+        display: inline-block;
+        background: url('/media/gfx/alliance/subcat.png');
+        text-align: center;
+        font-size: 13px;
+        font-weight: bold;
+    }

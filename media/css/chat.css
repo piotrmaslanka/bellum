@@ -1,0 +1,151 @@
+#chat_P
+{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 30px;
+    background: url('/media/gfx/chat/downbar_bg.png') repeat-x;
+}
+#chat_openchannel_box {
+    border: none;
+    background: url('/media/gfx/chat/player_bg.png') repeat-x;
+    float: right;
+    font-weight: bold;
+    width: 10%;
+    height: 29px;
+}
+#chat_openchannel_sep {
+    float: right;
+    height: 30px;
+    width: 6px;
+    background: url('/media/gfx/chat/sep.png');
+}
+#chat_PC
+{
+    padding-left: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+    .chat_PCE
+    {
+        height: 22px;
+        font-size: 18px;
+        display: inline-block;
+        padding-left: 3px;
+        padding-right: 3px;
+        margin-left: 3px;
+        margin-right: 3px;
+    }
+    .chat_PCE_privmsg { border: 1px solid yellow; }
+    .chat_PCE_ur { border: 1px solid red; }
+    .char_PCE_sr { border: 1px solid blue; }
+
+#chat_fixroot {
+    z-index: 4;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0; left: 0;
+}
+    #chat_fixroot #chat_fixrootm {
+        display: table;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0px;
+        margin-top: 0px;
+        width: 618px;
+    }
+    #chat_fixrootm #chat_fixrootf {         /* chat_O is the primary chatting utility */
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    #chat_fixrootf #chat_O {
+        background-color: rgb(32, 51, 51);
+        color: rgb(71, 132, 132);
+        position: relative;
+    }
+        #chat_O > .pl { position: absolute; left: 0; top: 35px; bottom: 35px; width: 6px; background: url('/media/gfx/chat/chat_l.png') repeat-y;}
+        #chat_O > .pr { position: absolute; right: 0; top: 35px; bottom: 35px; width: 6px; background: url('/media/gfx/chat/chat_r.png') repeat-y;}
+    .chat_O_row {
+        position: relative;
+        color: white;
+        height: 25px;
+        font-size: 16px;
+        padding-left: 10px; padding-right: 10px;
+        padding-top: 5px; padding-bottom: 5px;
+        background: url('/media/gfx/chat/chat_bg.png') repeat-x;
+    }
+        .chat_O_row .pinleft { float: left; margin-left: 10px; }
+        .chat_O_row .pinright { float: right; margin-right: 10px; }
+        .chat_O_row > .pl { position: absolute; top: 0; left: 0; height: 35px; width: 6px; background: url('/media/gfx/chat/chat_start.png') repeat-x;}
+        .chat_O_row > .pr { position: absolute; top: 0; right: 0; height: 35px; width: 6px; background: url('/media/gfx/chat/chat_end.png') repeat-x;}
+        .chat_O_row a.button { color: rgb(71, 132, 132); }
+        .chat_O_row a.button:hover { color: white; }
+
+    #chat_O_msg { margin-left: 6px; margin-right: 6px; max-height: 300px; overflow: auto; width: 606px; margin-top: 1em; margin-bottom: 1em; }
+    #chat_O_txta { margin-left: 6px; margin-right: 6px; background-color: rgb(45, 71, 71); color: white; width: 606px; overflow: auto; border: none; padding: 0 0 0 0; }
+
+    #chat_fixrootf #chat_X {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 618px;
+        vertical-align: top;
+        background-color: rgb(32, 51, 51);
+        color: rgb(71, 132, 132);
+        color: white;
+    }
+    #chat_X #chat_XX {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+        #chat_XX > .pl { position: absolute; left: 0; top: 35px; bottom: 35px; width: 6px; background: url('/media/gfx/chat/chat_l.png') repeat-y;}
+        #chat_XX > .pr { position: absolute; right: 0; top: 35px; bottom: 35px; width: 6px; background: url('/media/gfx/chat/chat_r.png') repeat-y;}
+    .chat_X_row {
+        position: relative;
+        color: white;
+        height: 25px;
+        font-size: 16px;
+        padding-left: 10px; padding-right: 10px;
+        padding-top: 5px; padding-bottom: 5px;
+        background: url('/media/gfx/chat/chat_bg.png') repeat-x;
+    }
+        .chat_X_row .pinleft { float: left; margin-left: 10px; }
+        .chat_X_row .pinright { float: right; margin-right: 10px; }
+        .chat_X_row > .pl { position: absolute; top: 0; left: 0; height: 35px; width: 6px; background: url('/media/gfx/chat/chat_start.png') repeat-x;}
+        .chat_X_row > .pr { position: absolute; top: 0; right: 0; height: 35px; width: 6px; background: url('/media/gfx/chat/chat_end.png') repeat-x;}
+        .chat_X_row a.button { color: rgb(71, 132, 132); }
+    #chat_X_row_b {
+        position: absolute;
+        bottom: 0px;
+        height: 35px;
+        width: 100%;
+    }
+
+    #chat_X_txt {
+        position: absolute;
+        top: 35px;
+        bottom: 35px;
+        left: 6px;
+        right: 6px;
+        overflow: auto;
+    }
+    #chat_X_txt .c_mine {
+        background-color: rgb(45, 71, 71); color: white;
+    }
+    #chat_X_txt .c_others {
+
+    }
+    #chat_X_txt .c_when {
+        float: right;
+        font-weight: bold;
+    }
+
+#chat_C {
+        
+}

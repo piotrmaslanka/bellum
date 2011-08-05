@@ -1,0 +1,138 @@
+.spacer { margin-top: 10px; }
+
+.spacer10 { padding-top: 10px; }
+
+#planet_map_bg
+{
+    position: absolute;
+    left: 440px;
+    right: 20px;
+    padding-left: 44px;
+    height: 200px;
+}
+
+#province_specific_contents { min-height: 345px; }  /* so as to accomodate for planet map */
+#nrpos { position: relative; height: 345px; width: 345px; }
+.nrimg { z-index: 1; position: absolute; }
+.reloc_button { z-index: 1; position: absolute; top: 0; right: 0; }
+.scan_button { z-index: 1; position: absolute; top: 0; left: 0; }
+.map_button { z-index: 1; position: absolute; bottom: 0; right: 0; }
+
+#buildings_overview_bg_guard { min-height: 350px; }
+#buildings_overview_bg
+{
+    margin-left: 20px;
+    background-color: rgb(115, 115, 115);
+    width: 400px;
+}
+#buildings_overview_bg > .header
+{
+    background-color: rgb(97, 97, 97);
+    width: 100%;
+}
+#provincename { padding-left: 20px; font-size: 20px; }
+#adjoint_to { padding-right: 20px; font-size: 20px; float: right; }
+
+#buildings_overview_bg > .content { width: 100%; padding-bottom: 10px; }
+
+.slot
+{
+    position: relative;
+    width: 100%;
+    background-color: rgb(157, 157, 157);
+    color: black;
+    padding-bottom: 1px;
+}
+.slot a { text-decoration: underline; }
+
+.slot_destroy_button
+{
+    float: right;
+}
+.generic_name
+{
+    font-weight: bold;
+    float: left;
+    background-color: rgb(71, 71, 71);
+    color: rgb(182, 182, 182);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.slot_caption
+{
+    text-align: center;
+    font-size: 17px;
+    padding-bottom: 5px;
+}
+.slot_caption_level { font-weight: bold; }
+.slot_data
+{
+    width: 100%;
+}
+.slot_data > .header
+{
+    float: left;
+    padding-left: 20px;
+    padding-right: 10px;
+    color: rgb(97, 97, 97);
+    font-weight: bold;
+}
+.slot_data > .content
+{
+}
+ul.content
+{
+    list-style: none;
+    display: table-cell;
+}
+ul.content > li
+{
+    display: inline;
+    padding-left: 5px;
+}
+
+#garrison_overview_bg
+{
+    margin-left: 20px;
+    margin-right: 20px; 
+    background-color: rgb(115, 115, 115);
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.garrison_name
+{
+    position: absolute;
+    left: 0; top: 0;
+}
+
+.garrison_positions
+{
+    margin: 10px 10px 0 10px;
+    background-color: rgb(127, 127, 127);
+    color: black;
+}
+table.units
+{
+    width: 100%;
+}
+td.name { width: 50%; text-align: center; }
+td.amount { width: 50%; text-align: center; }
+
+td.banner { width: 100%; text-align: center; font-weight: bold; }
+
+.garrison_offensive_selector
+{
+    margin: 0 10px 10px 10px;
+    background-color: rgb(139, 139, 139);
+    color: black;
+    text-align: center;
+    font-weight: bold;
+}
+
+.pvowner
+{
+    text-align: center;
+    padding-top: 10px;
+    font-size: 1.5em;
+}

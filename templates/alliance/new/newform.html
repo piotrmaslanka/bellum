@@ -1,0 +1,27 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/base/base.html" />
+<%def name="caption()">soj</%def>
+<%def name="head()" >
+    <link rel="stylesheet" type="text/css" href="/media/css/forma.css">
+</%def>
+<%def name="body()" >
+    <div class="spacer10"></div>
+    <form action="/alliance/new/" method="post">
+        <% indice = 0 %>
+        <table class="formtable">
+            % for field in form:
+            <tr class="field${indice}">
+                % if field.errors != '':
+                    % for err in field.errors:
+                        <tr class="errorfield"><td></td><td>${err}</td></tr>
+                    % endfor
+                % endif
+                <th class="label${indice}">${field.label_tag()}</th>
+                <td class="label${indice}">${field}</td>
+            </tr>
+            <% indice = (indice + 1) % 2 %>
+            % endfor
+        </table>
+        <input type="submit" class="submit" value="Wyślij" />
+    </form>
+</%def>

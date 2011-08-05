@@ -1,0 +1,145 @@
+#pll {
+    width: 447px;
+    float: right;
+}
+    #pll_list {
+        padding-top: 47px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 255px;
+    }
+    #pll_list td { padding: 0 0 0 0; }
+    .pll_list_entry {
+        width: 255px;
+        font-family: Tahoma;
+        height: 35px;
+        background-color: rgb(65, 65, 65);
+        font-size: 14pt;
+        color: rgb(244, 244, 244);
+    }
+    .pll_list_entry_mothership {
+        width: 255px;
+        font-family: Tahoma;
+        font-size: 14pt;
+        height: 35px;
+        background-color: rgb(97, 97, 97);
+        color: rgb(244, 244, 244);
+    }
+    .pll_list_entry img { float: right; }
+    .pll_list_brk {
+        height: 5px;
+    }
+#pla {
+    width: 447px;
+    float: left;
+}
+    #pla_map {
+        width: 345px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 345px;
+        position: relative;
+    }
+    #pla_map > a { position: absolute; z-index: 2; }
+
+#garrison {
+    margin-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: relative;
+}
+    .garrison_box {
+        top: 0px;
+        height: 76px;
+        width: 155px;
+        margin-left: 14px;
+        margin-right: 14px;
+        display: inline-block;
+        text-align: center;
+        font-size: 14pt;
+        overflow: hidden;
+    }
+        .garrison_box_top {
+            padding-top: 3px;
+            background-color: rgb(15, 15, 15);
+            color: rgb(165, 165, 165);
+            height: 52px;   /* w/padding 55px */
+        }
+        .garrison_box_top > span { color: rgb(105, 105, 105); }
+        .garrison_box_bottom {
+            background-color: rgb(65, 65, 65);
+            height: 21px;
+            position: relative;
+        }
+        .garrison_box_bottom > input {
+            position: absolute;
+            top: 0px; left: 0px;
+            background-color: rgb(65, 65, 65);
+            width: 155px;
+            height: 21px;
+            color: rgb(255, 185, 105);
+            border: none;
+            padding: 0 0 0 0;
+            margin: 0 0 0 0;
+            text-align: center;
+            font-size: 18px;
+        }
+#commands {
+    margin-top: 20px;
+    position: relative;
+}
+    #commands_box {
+        height: 90px;
+        width: 813px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: rgb(107, 107, 107);
+        position: relative;
+    }
+
+    #j_target { background-color: rgb(107, 107, 107); color: white; }
+    #commands_box_listtd {
+        height: 45px;
+        width: 370px; text-align: center;
+        position: relative;
+    }
+    #commands_box_desigtd {
+        height: 90px;
+        width: 243px;
+    }
+        #commands_box_desigtd_holdsphere {
+            margin-top: 28px;
+            margin-bottom: 27px;
+            margin-left: 16px;
+        }
+        #commands_box_desigtd_holdsphere > img {
+            margin-left: 15px;
+            margin-right: 15px;
+            display: inline-block;
+        }
+    #commands_box_fastseltd {
+        width: 100px;
+        height: 45px;text-align: center;
+    }
+    #commands_box_launchtd {
+        width: 200px;
+        height: 45px;text-align: center;
+        vertical-align: middle;
+    }
+
+    .command_box_send {
+        width: 139px;
+        padding-top: 6px;
+        color: black;
+        height: 24px;
+        background: url('/media/gfx/troopmove/send.png');
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 13px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .command_box_send:hover {
+        background: url('/media/gfx/troopmove/hl_send.png');
+        color: rgb(130, 130, 130);
+    }

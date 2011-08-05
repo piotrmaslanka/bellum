@@ -1,0 +1,28 @@
+textarea#textdata {
+    width: 854px;
+    color: rgb(138, 138, 138);
+    border: none;
+    font-size: 12px;
+    background-color: rgb(34, 41, 45);
+    font-family: Verdana;
+}
+div#mpbox {
+    padding: 20px 20px 20px 20px;
+    
+    background: url('/media/gfx/alliance/info_top.png') repeat-x;
+    background-color: rgb(34, 41, 45);
+    margin-bottom: 10px;
+}
+
+div#save {
+    float: right;
+    text-align: center;
+    color: rgb(231, 199, 33);
+    height: 24px;
+    width: 139px;
+    margin-right: 50px;
+    font-size: 13px;
+    background: url('/media/gfx/alliance/save.png');
+    font-weight: bold;
+    padding-top: 6px;
+}

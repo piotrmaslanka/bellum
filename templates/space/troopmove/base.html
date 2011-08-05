@@ -1,0 +1,66 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/base/base.html" />
+<%def name="caption()">wojsko</%def>
+<%def name="head()" >
+                <script type="text/javascript">
+                    var g_current_planet_id = ${current_planet.id};
+                    var g_mother_orbiting = ${mother.duePosition().id};
+                    var g_current_designation = 0;
+                    % if current_province == None:
+                        var g_selected_province = null;
+                    % else:
+                        var g_selected_province = ${current_province.id};
+                    % endif
+                    var g_can_press_launch = true;
+                </script>
+                <script type="text/javascript" src="/media/js/scripts/script.js"></script>
+		<script type="text/javascript" src="/media/ajax/baseajax.js" ></script>
+		<script type="text/javascript" src="/media/ajax/troopmove.js" ></script>
+                <link rel="stylesheet" type="text/css" href="/media/css/troopmove.css">
+</%def>
+<%def name="body()" >
+    <% from django.utils.html import escape %>
+    <div id="pla">
+        <div id="pla_map">  <!--    here goes supplied HTML -->
+            ${fillin_pla}
+        </div>              <!--    here ends supplied HTML -->
+    </div>
+    <div id="pll">
+        <div id="pll_list">
+            <table>                         <!-- j_* are names for usage in scripts -->
+                % if current_province == None:
+                    <tr><td style="border: 1px solid rgb(124, 124, 124);" class="pll_list_entry_mothership" id="j_mothership" onclick="cr_pla_ms_selected()">${mother.name}
+                % else:
+                    <tr><td class="pll_list_entry_mothership" id="j_mothership" onclick="cr_pla_ms_selected()">${escape(mother.name)}
+                % endif
+                        <span style="float: right;">
+                            % if mother.isRelocating():
+                                W podróży
+                            % else:
+                                ${escape(mother.orbiting.name)}
+                            % endif
+                        </span>
+                </td></tr>
+                <tr><td class="pll_list_brk"></td></tr>
+                % for planet in planets:
+                    % if highlight_planet and (current_planet == planet):
+                        <tr><td class="pll_list_entry" id="j_pla_p${planet.id}" style="border: 1px solid rgb(124, 124, 124);" onclick="cr_pla_planet_selected(${planet.id})">${planet.name} (${provinces_per_planet[planet.id]})<img src="/media/gfx/troopmove/mini_blue.png" alt=""></td></tr>
+                    % else:
+                        <tr><td class="pll_list_entry" id="j_pla_p${planet.id}" onclick="cr_pla_planet_selected(${planet.id})">
+                                ${escape(planet.name)} (${provinces_per_planet[planet.id]})
+                                <img src="/media/gfx/troopmove/p${planet.kind}.png" alt="">
+                        </td></tr>
+                    % endif
+                    <tr><td class="pll_list_brk"></td></tr>
+                % endfor
+            </table>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="garrison">  <!--    here goes supplied HTML -->
+        ${fillin_garrison}
+    </div>                  <!--    here ends supplied HTML -->
+    <div id="commands">  <!--    here goes supplied HTML -->
+        ${fillin_commands}
+    </div>                  <!--    here ends supplied HTML -->
+</%def>

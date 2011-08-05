@@ -1,0 +1,67 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/stats/reports/base.html" />
+<%def name="report_base()">
+    <% from django.utils.html import escape %>
+    <% from bellum.meta import MGID%>
+    <% from bellum.common.fixtures.landarmy_stats import UNIT_NAMES %>
+    <% from bellum.common.fixtures.province_build import BUILDING_NAMES %>
+
+    Skanowana prowincja: <a href="/space/planetview/province/${r.code['province'].id}/">${escape(r.code['province'].name)}</a><br>
+
+    % if r.code['free']:
+        <b>Prowincja wolna</b><br>
+        % if r.code['town_coef'] != None:
+            Współczynnik wydobycia tytanu: ${r.code['titan_coef']*100}%<br>
+            Współczynnik wydobycia plutonu: ${r.code['pluton_coef']*100}%<br>
+            Współczynnik wydobycia manpower: ${r.code['town_coef']*100}%<br>
+        % endif
+    % else:
+        <b>Prowincja zajęta</b>
+        % if r.code['owner'] != None:
+            przez <a href="/uprofile/view/${r.code['owner'].id}/">${escape(r.code['owner'].empire)}</a><br>
+        % endif
+
+        % if r.code['buildings'] != None:
+            % for oslot, pair in r.code['buildings'].iteritems():
+            <% otype, olvl = pair %>
+                <% if otype == 0: continue %>
+                ${BUILDING_NAMES[otype]} - poziom ${olvl} <br>
+            % endfor
+        % endif
+
+
+        % if r.code['troops'] != []:
+            <table>
+            % for owner, garrison in r.code['troops']:
+                <tr>
+                    <td colspan="${MGID}">
+                        <a href="/uprofile/view/${owner.id}">${escape(owner.empire)}</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    % for name in UNIT_NAMES[owner.race]:
+                        <td>${name}</td>
+                    % endfor
+                </tr>
+
+                <tr>
+                    % for x in xrange(0, MGID+1):
+                        <td>${garrison[x]}</td>
+                    % endfor
+                </tr>
+            % endfor
+            </table>
+        % endif
+
+        % if r.code['natural_defense_level'] != None:
+            Poziom obrony naturalnej: ${r.code['natural_defense_level']*100}%<br>
+        % endif
+
+        % if r.code['town_coef'] != None:
+            Współczynnik wydobycia tytanu: ${r.code['titan_coef']*100}%<br>
+            Współczynnik wydobycia plutonu: ${r.code['pluton_coef']*100}%<br>
+            Współczynnik wydobycia manpower: ${r.code['town_coef']*100}%<br>
+        % endif
+    % endif
+</%def>

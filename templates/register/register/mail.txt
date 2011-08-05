@@ -1,0 +1,18 @@
+# coding=UTF-8
+Witaj,
+
+Założyłeś nowe konto na Bellum
+
+Login: ${login}
+Hasło: ${password}
+Nazwa imperium: ${empire}
+
+Aby aktywować konto, użyj poniższego linka
+http://www.thebellum.pl/register/activate/?key=${key}
+
+Jeśli to nie ty zakładałeś konto w grze Bellum, zignoruj ten list.
+
+Wiadomość co prawda generowana jest automatycznie, jednak zawsze możesz na nią odpowiedzieć, gdyż skrzynka jest monitorowana.
+
+Pozdrawiamy i życzymy miłej gry,
+Administracja www.thebellum.pl

@@ -1,0 +1,130 @@
+# -*- coding: utf-8 -*-
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Bellum</title>
+        <meta name="description" content="Dynamiczna strategiczna gra przeglądarkowa z naciskiem na współpracę zespołową">
+        <meta name="keywords" content="bellum, gra, bmmo, browser, przeglądarka, strategiczna, strategia, mmorts">
+        <meta name="robots" content="nofollow">
+        <link rel="stylesheet" type="text/css" href="/media/css/login.css">
+        <meta name="google-site-verification" content="CF752QFtj5O22N8DmgPaHlDBYHjiW0Gq-Y8sAVKgbeY">
+        <script type="text/javascript" src="/media/js/gfxmblock.js"></script>
+</head>
+<body>
+<p><img alt="Site background" style="z-index: -10; position: fixed; top: 0px; left: 0px; width: 100%; height: 100%;" src="/media/gfx/login/bg.jpg"></p>
+<form id="form" action="/register/login/" method="post">
+<table id="main">
+
+<tr><td><!-- table: ([03], [table: ([04,n], [06,07], [08,n])  ]) -->
+    <table>
+        <tr>
+            <td id="x03"></td>
+            <td>
+                <table>
+                    <tr><td colspan="2" id="x04"></td></tr>
+                    <tr><td id="x06"><img alt="Portal site button" src="/media/gfx/login/06.png" onclick="window.location='/portal/'" onmouseover="gmbHighlight(this)" onmouseout="gmbUnhighlight(this)"></td>
+                        <td id="x07"></td>
+                    </tr>
+                    <tr><td colspan="2" id="x08"></td></tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+<td></tr>
+<tr><td><!-- table: ([table:09-19], [11]) -->
+    <table>
+        <tr>
+            <td>
+                <table> <!-- table that goes from 09 to 19. Has 5 trs and 2 tds each -->
+                    <tr>
+                        <td id="x09"></td>
+                        <td id="x10"></td>
+                    </tr>
+                    <tr>
+                        <td id="x12" class="cred_caption">Login</td>
+                        <td id="x13"><div class="xcontainer"><input type="text" name="login"></div></td>
+                    </tr>
+                    <tr>
+                        <td id="x14"></td>
+                        <td id="x15"></td>
+                    </tr>
+                    <tr>
+                        <td id="x16" class="cred_caption">Hasło</td>
+                        <td id="x17"><div class="xcontainer"><input type="password" name="password" onkeydown="if (event.keyCode==13) document.getElementById('form').submit();"></div></td>
+                    </tr>
+                    <tr>
+                        <td id="x18"></td>
+                        <td id="x19"></td>
+                    </tr>
+                </table>
+            </td>
+            <td id="x11"></td>
+        </tr>
+    </table>
+</td></tr>
+<tr><td><!-- table: ([20], [21], [table:([22]), ([24])  ], [23]) -->
+    <table>
+        <tr>
+            <td id="x20"></td>
+            <td id="x21"></td>
+            <td>
+                <table>
+                    <tr><td id="x22"><img alt="Login button" src="/media/gfx/login/22.png" onclick="document.getElementById('form').submit()" onmouseover="gmbHighlight(this)" onmouseout="gmbUnhighlight(this)"></td></tr>
+                    <tr><td id="x24"></td></tr>
+                </table>
+            </td>
+            <td id="x23"></td>
+        </tr>
+    </table>
+</td></tr>
+<tr><td><!-- table: ([25, 26]) -->
+    <table>
+        <tr>
+            <td id="x25" onclick="window.navigate('/register/register/');">
+                    <div class="xcontainer">
+                        <a href="/register/register/">
+                            <span class="specl">Załóż nowe konto</span>
+                        </a>
+                    </div>
+            </td>
+            <td id="x26" onclick="window.navigate('/register/passremind/');">
+                    <div class="xcontainer">
+                        <a href="/register/passremind/">
+                            <span class="specl">Zapomniałem hasła</span>
+                        </a>
+                    </div>
+            </td>
+        </tr>
+    </table>
+</td></tr>
+<tr><td id="break_before_reddot"></td></tr>
+<tr><td>
+    <table><tr>
+            <td id="reddot_spacer_1"></td>
+            <td>
+    % if (len(form.errors) > 0) or banned:
+        <img src="/media/gfx/login/reddot.png" style="display: inline; padding-right: 10px;" alt="Invalid credentials alert">
+        <div class="relative" style="display: inline;">
+            <span id="reddot_text">
+        % if banned:
+            Zbanowany do ${bannedto}<br>Powód: ${banreason}
+        % elif form.errors['__all__'][0] == 'INVALID_DATA':
+            Zły login lub hasło
+        % elif form.errors['__all__'][0] == 'INACTIVE':
+            Konto nieaktywne. Sprawdź skrzynkę pocztową lub skontaktuj się z administratorem.
+        % endif
+            </span>
+        </div>
+    % endif
+            </td>
+    </tr></table>
+</td></tr>
+</table>
+</form>
+<!-- facebook box -->
+<script src="http://connect.facebook.net/pl_PL/all.js#xfbml=1"></script><fb:like-box href="http://www.facebook.com/pages/Bellum/196049960436933" width="292" show_faces="true" stream="true" header="true"></fb:like-box>
+<!-- end of facebook box -->
+</body>
+</html>

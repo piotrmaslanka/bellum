@@ -1,0 +1,108 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/base/base.html" />
+<%def name="caption()">profil</%def>
+<%def name="head()" >
+    <link rel="stylesheet" type="text/css" href="/media/css/uprofile.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/uprofile-edit.css">
+</%def>
+<%def name="body()" >
+    <% from django.utils.html import escape %>
+   <%
+      from bellum.common.utils import humanize__convertSeconds
+      from bellum.mother.models import Mother
+      from bellum.alliance.models import AllianceMembership
+      from bellum.stats.models import RankingNone
+      try:
+        am = AllianceMembership.objects.get(account=account.id)
+      except:
+        am = False
+    %>
+
+    <form id="myform" action="/uprofile/edit/" method="post">
+    <div id="top_bar">
+        <div id="top_bar_buttons">
+            <div class="top_bar_button" onclick="window.location='/uprofile/view/${account.id}/'">PROFIL</div>
+            <div class="top_bar_button" id="top_bar_button_hl">EDYTUJ</div>
+            <div class="top_bar_button" onclick="chat_open_report_archive()">RAPORTY</div>
+                <div class="top_bar_button" onclick="window.location='http://forum.thebellum.pl/'">FORUM</div>
+        </div>
+        <div id="top_bar_title">
+            % if account.is_avatar == 0:
+                <img src="/media/gfx/uprofile/p_img.png" alt="Morda">
+            % elif account.is_avatar == 1:
+                <img src="/media/avatars/u${account.id}.png" alt="Awatar">
+            % elif account.is_avatar == 2:
+                <img src="/media/avatars/u${account.id}.gif" alt="Awatar">
+            % endif
+            ${escape(account.empire)}
+            % if am != False:
+                &nbsp;<span>${escape(am.alliance.shname)}</span>
+            % endif
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <table id="infotab">
+        % if pfochange_success:
+            <tr><td class="formerror">POMYŚLNIE ZMIENIONO DANE!</td></tr>
+        % endif
+        % if len(form['sex'].errors) > 0:
+            <tr><td class="formerror"><span>${form['sex'].errors[0]}</span></td></tr>
+        % endif
+        <tr><td>PŁEĆ:${form['sex']}</td></tr>
+        % if len(form['birthdate_year'].errors) > 0:
+            <tr><td class="formerror"><span>${form['birthdate_year'].errors[0]}</span></td></tr>
+        % endif
+        <tr><td>ROK URODZENIA: ${form['birthdate_year']}</td></tr>
+        % if len(form['birthdate_month'].errors) > 0:
+            <tr><td class="formerror"><span>${form['birthdate_month'].errors[0]}</span></td></tr>
+        % endif
+        <tr><td>MIESIĄC URODZENIA: ${form['birthdate_month']}</td></tr>
+        % if len(form['birthdate_day'].errors) > 0:
+            <tr><td class="formerror"><span>${form['birthdate_day'].errors[0]}</span></td></tr>
+        % endif
+        <tr><td>DZIEŃ URODZENIA: ${form['birthdate_day']}</td></tr>
+    </table>
+
+    <div id="funtextarea">
+        ${form['signature']}
+    </div>
+    <div class="save" onclick="document.getElementById('myform').submit()">ZAPISZ</div>
+    </form>
+
+    <form id="myform2" action="/uprofile/edit/password/" method="post">
+    <table id="infotab">
+        % if pwdchange_success:
+            <tr><td class="formerror">POMYŚLNIE ZMIENIONO HASŁO!</td></tr>
+        % endif
+        % if len(pform['current_password'].errors) > 0:
+            <tr><td class="formerror"><span>${pform['current_password'].errors[0]}</span></td></tr>
+        % endif
+        <tr><td>AKTUALNE HASŁO:${pform['current_password']}</td></tr>
+        % if len(pform['new_password1'].errors) > 0:
+            <tr><td class="formerror"><span>${pform['new_password1'].errors[0]}</span></td></tr>
+        % endif
+        <tr><td>NOWE HASŁO: ${pform['new_password1']}</td></tr>
+        % if len(pform['new_password2'].errors) > 0:
+            <tr><td class="formerror"><span>${pform['new_password2'].errors[0]}</span></td></tr>
+        % endif
+        <tr><td>POWTÓRZ NOWE HASŁO: ${pform['new_password2']}</td></tr>
+    </table>
+    <div class="save" onclick="document.getElementById('myform2').submit()">ZMIEŃ</div>
+    </form>
+    <div class="clear"></div>
+    <form id="myform3" action="/uprofile/edit/avatar/" method="post" enctype="multipart/form-data">
+    <table id="infotab">
+        % if avtchange_success:
+            <tr><td class="formerror">POMYŚLNIE ZMIENIONO AWATAR!</td></tr>
+        % endif
+       <tr><td class="formerror">Awatar statyczny - dowolny plik, zostanie zeskalowany</td></tr>
+       <tr><td class="formerror">Awatar animowany - GIF, 32x32 pikseli, do 100 kB</td></tr>
+        % if len(aform['avatar'].errors) > 0:
+            <tr><td class="formerror"><span>${aform['avatar'].errors[0]}</span></td></tr>
+        % endif
+        <tr><td>AWATAR: ${aform['avatar']}</td></tr>
+    </table>
+    <div class="save" onclick="document.getElementById('myform3').submit()">USTAW</div>
+    </form>
+</%def>

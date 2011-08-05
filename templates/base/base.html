@@ -1,0 +1,126 @@
+# coding=UTF-8
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Bellum</title>
+	${self.head()}
+        <script type="text/javascript" src="/media/js/gfxmblock.js"></script>
+        <script type="text/javascript" src="/media/ajax/baseajax.js"></script>
+        <script type="text/javascript" src="/media/ajax/chat.js"></script>
+        <script type="text/javascript" src="/media/js/base.js"></script>
+        <link rel="stylesheet" type="text/css" href="/media/css/base.css">
+        <link rel="stylesheet" type="text/css" href="/media/css/chat.css">
+        <link rel="stylesheet" type="text/css" href="/media/js/scripts/style.css">
+</head>
+<body>
+    <div id="background"><img alt="Background" src="/media/gfx/login/bg.jpg"></div>
+    <div id="centerb">
+        <div id="topmenu">
+            <table id="topmenu_t">
+                <tr id="topmenu_lt">
+                    <td rowspan="2" id="topmenu_logo"></td>
+                    <td class="filler" style="width: 70px;"></td>
+                    <td class="filler" style="width: 60px;"></td>
+                    <td id="topmenu_resource_tyt"></td>
+                    <td class="filler" style="width: 60px;"></td>
+                    <td class="filler" style="width: 16px;"></td>
+                    <td class="filler" style="width: 60px;"></td>
+                    <td id="topmenu_resource_plu"></td>
+                    <td class="filler" style="width: 60px;"></td>
+                    <td class="filler" style="width: 5px;"></td>
+                    <td class="filler" style="width: 60px;"></td>
+                    <td id="topmenu_resource_men"></td>
+                    <td class="filler" style="width: 60px;"></td>
+                    <td class="filler" style="width: 33px;"></td>
+                    <td id="topmenu_prof"><img alt="Profil" src="/media/gfx/top/prof.png" onclick="window.location='/uprofile/view/${pgo.account.id}/'" onmouseover="gmbHighlight(this)" onmouseout="gmbUnhighlight(this)"></td>
+                    <td class="filler" style="width: 13px;"></td>
+                    <td id="topmenu_exit"><img alt="Wyloguj" src="/media/gfx/top/exit.png" onclick="window.location='/register/logout/'" onmouseover="gmbHighlight(this)" onmouseout="gmbUnhighlight(this)"></td>
+                    <td id="topmenu_lt_end" rowspan="2"></td>
+                </tr>
+                <tr id="topmenu_lb">
+                    <td class="filler"></td>
+                    <td colspan="3" id="resources_titan">${int(pgo.resources.titan)}</td>
+                    <td colspan="1" class="filler"></td>
+                    <td colspan="3" id="resources_pluton">${int(pgo.resources.pluton)}</td>
+                    <td colspan="1" class="filler"></td>
+                    <td colspan="3" id="resources_men">${int(pgo.resources.men)}</td>
+                    <td colspan="4" class="filler"></td>
+                </tr>
+            </table>
+            <table id="topmenu_menu">
+                <tr>
+                    <td id="topmenu_decos"></td>
+                    <td class="m_item" onclick="window.location='/mother/overview/'">STATEK</td>
+                    <td class="m_item" onclick="window.location='/mother/garrison/land/'">SZKOLENIE</td>
+                    <td class="m_item" onclick="window.location='/space/troopmove/mother/'">GARNIZON</td>
+                    <td class="m_item" onclick="window.location='/space/planetview/${pgo.mother.duePosition().id}/'">PLANETA</td>
+                    <td class="m_item" onclick="window.location='/stats/empire/'">IMPERIUM</td>
+                    <td class="m_item" onclick="window.location='/stats/income'">WYDOBYCIE</td>
+                    <td class="m_item" onclick="window.location='/space/regionmap/'">MAPA</td>
+                    <td class="m_item" onclick="window.location='/stats/larf/'">WYDARZENIA</td>
+                    % if pgo.alliance == False:
+                        <td class="m_item" onclick="window.location='/alliance/new/'">SOJUSZ</td>
+                    % else:
+                        <td class="m_item" onclick="window.location='/alliance/view/own/'">SOJUSZ</td>
+                    % endif
+                    <td class="m_item" onclick="window.location='/stats/ranking/all/'">RANKING</td>
+                    <td id="topmenu_decoe"></td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="mblock">
+            <table id="mblock_t">
+                <tr>
+                    <td id="mblock_t1"></td>
+                    <td id="mblock_t2"></td>
+                    <td class="mblock_namebg"></td>
+                    <td id="mblock_t3" style="background: url('/media/gfx/mblock/${self.caption()}.png');"></td>
+                    <td class="mblock_namebg"></td>
+                    <td id="mblock_t4"></td>
+                    <td id="mblock_t5"></td>
+                </tr>
+            </table>
+            <table id="mblock_m">
+                <tr>
+                    <td id="mblock_ml"></td>
+                    <td id="mblock_mm">${self.body()}</td>
+                    <td id="mblock_mr"></td>
+                </tr>
+            </table>
+            <table id="mblock_b">
+                <tr>
+                    <td id="mblock_b1"></td>
+                    <td id="mblock_b2"></td>
+                    <td class="mblock_bbg"></td>
+                    <td id="mblock_b3"></td>
+                    <td class="mblock_bbg"></td>
+                    <td id="mblock_b4"></td>
+                    <td id="mblock_b5"></td>
+                </tr>
+            </table>
+        </div>                    
+    </div>
+    <!-- chat section -->
+
+    <div id="chat_P">
+        <input id="chat_openchannel_box" type="text" onkeydown="if (event.keyCode==13) chat_opensend_inputbox();" onfocus="chat_open_cache()" onblur="setTimeout('chat_close_cache()', 100)">
+        <div id="chat_openchannel_sep"></div>
+        <div id="chat_PC">
+        </div>
+    </div>
+
+    <!-- chat section end -->
+    <script type="text/javascript">
+     var g_glbl_ratio_titan = ${pgo.resources.ratio_titan};
+     var g_glbl_ratio_pluton = ${pgo.resources.ratio_pluton};
+     var g_glbl_ratio_men = ${pgo.resources.ratio_men};
+     var g_glbl_titan = ${pgo.resources.titan};
+     var g_glbl_pluton = ${pgo.resources.pluton};
+     var g_glbl_men = ${pgo.resources.men};
+     startUpdatingResource();
+     chat_refresh_P();
+    </script>
+</body>
+</html>

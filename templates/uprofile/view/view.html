@@ -1,0 +1,119 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/base/base.html" />
+<%def name="caption()">profil</%def>
+<%def name="head()" >
+    <link rel="stylesheet" type="text/css" href="/media/css/uprofile.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/uprofile-view.css">
+    <script type="text/javascript" src="/media/ajax/profile.js" ></script>
+    <script type="text/javascript">
+        var currentlyViewing = ${account.id};
+    </script>
+</%def>
+<%def name="body()" >
+    <% from django.utils.html import escape %>
+   <%
+      from datetime import datetime, timedelta
+      from bellum.common.utils import humanize__convertSeconds
+      from bellum.mother.models import Mother
+      from bellum.alliance.models import AllianceMembership
+      from bellum.stats.models import RankingNone
+      from bellum.common.postmarkup import render_bbcode
+      try:
+        am = AllianceMembership.objects.get(account=account.id)
+      except:
+        am = False
+    %>
+
+    <div id="top_bar">
+        <div id="top_bar_buttons">
+            <div class="top_bar_button" id="top_bar_button_hl">PROFIL</div>
+            % if not same:
+                <div class="top_bar_button" onclick="chat_opensend(${account.id}, '${escape(account.empire)}')">WIADOMOŚĆ</div>
+            % else:
+                <div class="top_bar_button" onclick="window.location='/uprofile/edit/'">EDYTUJ</div>
+                <div class="top_bar_button" onclick="chat_open_report_archive()">RAPORTY</div>
+                <div class="top_bar_button" onclick="window.location='http://forum.thebellum.pl/'">FORUM</div>
+            % endif
+        </div>
+        <div id="top_bar_title">
+            % if account.is_avatar == 0:
+                <img src="/media/gfx/uprofile/p_img.png" alt="Morda">
+            % elif account.is_avatar == 1:
+                <img src="/media/avatars/u${account.id}.png" alt="Awatar">
+            % elif account.is_avatar == 2:
+                <img src="/media/avatars/u${account.id}.gif" alt="Awatar">
+            % endif
+            ${escape(account.empire)}
+            % if am != False:
+                &nbsp;<span>${escape(am.alliance.shname)}</span>
+            % endif
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    % if (not same) and (datetime.now() - pgo.account.registered_on > timedelta(3)):
+    <table id="rsendtab">
+        <tr><td class="first">WYŚLIJ SURÓWKĘ</td></tr>
+        <tr><td>TYTAN <input type="text" id="titan" name="titan"></td></tr>
+        <tr><td>PLUTON <input type="text" id="pluton" name="pluton"></td></tr>
+        <tr><td>MANPOWER <input type="text" id="men" name="men"></td></tr>
+        <tr><td class="send" onclick="send_resource()">WYŚLIJ [${humanize__convertSeconds(rtt)}]</td></tr>
+    </table>
+    % endif
+
+    <table id="infotab">
+        <tr><td>STATEK: <span>${escape(Mother.objects.get(owner=account).name)}</span></td></tr>
+        <tr>
+            % if am != False:
+                <td onclick="window.location='/alliance/view/${am.alliance.id}/'">
+                    SOJUSZ: <span>${escape(am.alliance.name)} [${escape(am.alliance.shname)}]</span>
+                </td>
+            % else:
+                <td>SOJUSZ: brak</td>
+            % endif
+        </tr>
+        <tr><td>PŁEĆ: <span>
+                    % if account.sex == 0:
+                        NIE WIADOMO ;)
+                    % elif account.sex == 1:
+                        MĘŻCZYZNA
+                    % elif account.sex == 2:
+                        KOBIETA
+                    % endif
+                </span></td></tr>
+        <tr><td>DATA URODZENIA: <span>
+		% if account.birthdate_year == None:
+			???
+		% else:
+			${account.birthdate_year}
+		% endif
+		-
+		% if account.birthdate_month == None:
+			???
+		% else:
+			${account.get_birthdate_month_display()}
+		% endif
+		-
+		% if account.birthdate_day == None:
+			???
+		% else:
+			${account.get_birthdate_day_display()}
+		% endif
+                </span></td></tr>
+        <% def getrankid():
+            try:
+                return RankingNone.objects.get(account=account).id
+            except:
+                return u'???'
+           %>
+        <tr><td>RANKING: <span>${getrankid()}</span></td></tr>
+    </table>
+
+    <div id="funtextarea">
+        % if account.signature == None:
+                nieokreślona
+        % else:
+                ${render_bbcode(account.signature)}
+        % endif
+    </div>
+</%def>

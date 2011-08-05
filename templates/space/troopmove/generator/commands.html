@@ -1,0 +1,55 @@
+# coding=UTF-8
+    <% from django.utils.html import escape %>
+<div id="commands_box">
+    <table>
+        <tr>
+            <td id="commands_box_listtd">Źródło:
+            % if source == None:
+                HQ ${escape(mother.name)}
+            % else:
+                ${escape(source.name)}
+            % endif
+            </td>
+            <td rowspan="2" id="commands_box_desigtd">
+                <div id="commands_box_desigtd_holdsphere">
+                    <img src="/media/gfx/troopmove/hl_da.png" alt="" onclick="cr_select_designation(0)" id="j_des_0" onmouseover="tooltip.show('Bezwarunkowy atak')" onmouseout="tooltip.hide()">
+                    <img src="/media/gfx/troopmove/dra.png" alt="" onclick="cr_select_designation(1)" id="j_des_1" onmouseover="tooltip.show('Jeśli będzie w rękach sojusznika gdy dotrze, wspomóż, inaczej zaatakuj')" onmouseout="tooltip.hide()">
+                    <img src="/media/gfx/troopmove/drf.png" alt="" onclick="cr_select_designation(2)" id="j_des_2" onmouseover="tooltip.show('Jeśli będzie w rękach sojusznika gdy dotrze, wspomóż, inaczej wycofaj')" onmouseout="tooltip.hide()">
+                </div>
+            </td>
+            <td id="commands_box_fastseltd" onclick="cr_setall(false)">Wyzeruj</td>
+            <td id="commands_box_fastseltd" onclick="cr_setall(true)">Wybierz wszystkie</td>
+        </tr>
+        <tr>
+            <td id="commands_box_listtd">Cel:
+                    % if limit_comandeering:
+                        % if mother.duePosition() == planet:
+                            <select name="target" id="j_target">
+                                <option value="mothership">HQ ${escape(mother.name)}</option>
+                            </select>
+                        % else:
+                            Gówno możesz zrobić
+                        % endif
+                    % else:
+                        <select name="target" id="j_target">
+                        % if source != None:
+                            % if mother.duePosition() == planet:
+                                <option value="mothership">HQ ${escape(mother.name)}</option>
+                            % endif
+                            % for province in source.getNeighbours():
+                                <option value="${province.id}">${escape(province.name)}</option>
+                            % endfor
+                        % else:
+                            % for province in planet.province_set.all():
+                                <option value="${province.id}">${escape(province.name)}</option>
+                            % endfor
+                        % endif
+                        </select>
+                    % endif
+            </td>
+            <td colspan="2" id="commands_box_launchtd" onclick="cr_submit()">
+                <div class="command_box_send">WYŚLIJ</div>
+            </td>
+        </tr>
+    </table>
+</div>

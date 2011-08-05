@@ -1,0 +1,40 @@
+# -*- coding: utf-8 -*-
+<%inherit file="/base/base.html" />
+<%def name="caption()">soj</%def>
+<%def name="head()" >
+    <script type="text/javascript" src="/media/ajax/baseajax.js" ></script>
+    <link rel="stylesheet" type="text/css" href="/media/css/alliance.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/alliance-teamsite.css">
+    <script type="text/javascript" src="/media/ajax/alliance_management.js" ></script>
+</%def>
+<%def name="body()" >
+    <% from bellum.alliance.models import AllianceApplication %>
+    <% from bellum.alliance.models import AM_PRIVILEGE, AM_KICK, AM_TEAMSITE, AM_ACCEPT %>
+    <% from django.utils.html import escape %>
+
+    <div id="top_bar">
+        <div id="top_bar_buttons">
+            <div class="top_bar_button" id="top_bar_button_hl" onclick="window.location='/alliance/view/${alliance.id}/'">PROFIL</div>
+            <div class="top_bar_button">DOŁĄCZ</div>
+        </div>
+        <div id="top_bar_title">
+            % if alliance.is_avatar == 0:
+                <img src="/media/gfx/alliance/a_img.png" alt="Mordy">
+            % elif alliance.is_avatar == 1:
+                <img src="/media/avatars/a${alliance.id}.png" alt="Awatar">
+            % elif alliance.is_avatar == 2:
+                <img src="/media/avatars/a${alliance.id}.gif" alt="Awatar">
+            % endif
+                ${escape(alliance.name)}
+                &nbsp;<span>${escape(alliance.shname)}</span>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div id="mpbox" style="margin-top: 20px;">
+        Aktualnie wystosowałeś podanie o przyjęcie do tego sojuszu. Poczekaj, aż któraś z uprawnionych osób je przejrzy. Jeśli jesteś aż tak niecierpliwy, możesz anulować podanie.
+    </div>
+
+    <div id="save" onclick="cancel_application(${alliance.id})">ANULUJ</div>
+    </form>
+</%def>

@@ -1,0 +1,11 @@
+# coding=UTF-8
+% for p in planet.province_set.all():
+    <a style="top: ${wctg(p.y)-19}px; left: ${wctg(p.x)-19}px;" href="javascript:cr_province_selected(${p.id})">
+        % if p == highlight_preference:
+            <img alt="Province ${p.planet_count_number+1}" id="psimg${p.planet_count_number}" src="/media/planet_images/${allegiance_strings[p.id]}${p.planet_count_number+1}h.png">
+        % else:
+            <img alt="Province ${p.planet_count_number+1}" id="psimg${p.planet_count_number}" src="/media/planet_images/${allegiance_strings[p.id]}${p.planet_count_number+1}.png">
+        % endif
+    </a>
+% endfor
+<img alt="Planet graph overview" src="/media/planet_images/${planet.id}.png">
