@@ -1,4 +1,4 @@
-﻿Copyright (c) 2009-2011 Piotr Maślanka <piotr.maslanka@henrietta.com.pl> and Michał Żak <turimaren@gmail.com>
+﻿Copyright (c) 2009-2011 Piotr Maślanka <piotr.maslanka at henrietta dot com.pl> and Michał Żak <turimaren at gmail>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero Public License as published by
