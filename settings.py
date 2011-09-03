@@ -37,6 +37,10 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+SMF_ENABLED = True			# if SMF not enabled, you
+							# won't need to install SMF
+							# as Bellum won't run SMF-related routines
+
 SMF_NAME = 'bellum_forum'
 SMF_USER = 'root'
 SMF_PASS = 'root'
