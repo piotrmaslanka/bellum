@@ -8,16 +8,11 @@ print 'Call generate_universe() for uni generation'
 print '> May take an hour even on fast equipment!'
 print 'Call expand_planetview_icons() for planet view icons generation'
 print 'Call expand_sectors() for sectors and regions generation'
-print 'Call regenerate_rankings_psn() to regenerate personal rankings'
-print 'Call regenerate_rankings_all() to regenerate alliance rankings'
+print 'Call regenerate_rankings() to regenerate rankings'
 
-
-def regenerate_rankings_psn():
-    from bellum.suite.ranking import regen_personal_ranking
+def regenerate_rankings():
+    from bellum.suite.ranking import regen_personal_ranking, regen_allied_ranking
     regen_personal_ranking()
-
-def regenerate_rankings_all():
-    from bellum.suite.ranking import regen_allied_ranking
     regen_allied_ranking()
 
 def expand_sectors():
