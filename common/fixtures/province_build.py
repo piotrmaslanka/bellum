@@ -7,8 +7,8 @@ _costs = {0: (None, None),       # nothing!
           1:  (ResourceIndex(titan=680, pluton=460, men=120), 315), # titan
           2:  (ResourceIndex(titan=600, pluton=560, men=200), 315), # pluton
           3:  (ResourceIndex(titan=900, pluton=40, men=250), 315), # town
-          4:  (ResourceIndex(titan=30000, pluton=15000, men=5000), 18000), # radar
-          5:  (ResourceIndex(titan=3000, pluton=100, men=500), 810), # fort
+          4:  (ResourceIndex(titan=3000, pluton=100, men=500), 810), # fort
+#         5:  (ResourceIndex(titan=30000, pluton=15000, men=5000), 18000), # radar
          }
 
 BUILDING_NAMES = (
@@ -16,8 +16,8 @@ BUILDING_NAMES = (
     u'Kopalnia tytanu',
     u'Kopalnia plutonu',
     u'Miasto',
-    u'Radar',
     u'Fortyfikacje',
+    #u'Radar',
 )
 
 def getCosts(pp, race, level, what):
