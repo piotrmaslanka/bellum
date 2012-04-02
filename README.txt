@@ -50,6 +50,7 @@ Sizes of main display window, as far as content is considered: 894px width
 bellum.settings
 bellum.stats.__init__
 bellum.common.utils.mail	
+templates/register/register/mail.txt - change domain name
 
 
 === How do I install this?
