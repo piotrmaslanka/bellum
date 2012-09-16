@@ -7,7 +7,7 @@ import re
 class ArmyOrder(models.IntegerField):
     def get_internal_type(self):
         return "ArmyOrder"
-    def db_type(self):
+    def db_type(self, connection=None):
         return 'bigint'    
 
 class Garrison(models.Model):
