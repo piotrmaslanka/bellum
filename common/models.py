@@ -9,7 +9,7 @@ class BigIntegerField(models.IntegerField):
     empty_strings_allowed = False
     def get_internal_type(self):
         return "BigIntegerField"
-    def db_type(self):
+    def db_type(self, connection=None):
         if settings.DATABASE_ENGINE == 'oracle':
             return 'NUMBER(19)'
         else:
@@ -23,7 +23,7 @@ class CSCharField(models.Field):
     def __init__(self, max_length, *args, **kwargs):
         super(CSCharField, self).__init__(*args, **kwargs)
         self.max_length = max_length
-    def db_type(self):
+    def db_type(self, connection=None):
         return 'char(%s)' % self.max_length        
     
 class Requirement(object):
